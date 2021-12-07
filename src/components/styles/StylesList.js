@@ -21,7 +21,7 @@ export const StyleList = () => {
             {
                 styles.map(
                     (styleObj) => {
-                            return <ul>{styleObj.style}</ul>
+                            return <ul key={`style--${styleObj.id}`}>{styleObj.style}</ul>
                         }
 
                     )
