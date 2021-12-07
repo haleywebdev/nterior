@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-export const DesignerList = () => {
+export const CustomerList = () => {
     const [users, assignUsers] = useState([])
 
     useEffect(
@@ -17,10 +17,11 @@ export const DesignerList = () => {
 
     return (
         <>
+
             {
                 users.map(
                     (userObj) => {
-                        if (userObj.designer === true) {
+                        if (userObj.designer === false) {
                             return <ul>{userObj.name}</ul>
                         }
 
