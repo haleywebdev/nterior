@@ -1,22 +1,39 @@
-import React from "react"
-import { CustomerList } from "./users/CustomerList"
-import { DesignerList } from "./users/DesignerList"
-import { StyleList } from "./styles/StylesList"
-import { RequestList } from "./requests/RequestList"
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import { ApplicationViews } from "./ApplicationViews";
+import { NavBar } from "./nav/NavBar";
+import { Login } from "./auth/Login";
+import { Register } from "./auth/Register";
+import "./Nterior.css";
 
 export const Nterior = () => {
 
     return (
         <>
-            <h1>Nterior</h1>
-            <h3>Designer's List</h3>
-            <DesignerList />
-            <h3>Customer's List</h3>
-            <CustomerList />
-            <h3>Style's List</h3>
-            <StyleList />
-            <h3>Design Request's List</h3>
-            <RequestList />
+
+            <Route
+                render={() => {
+                    if (localStorage.getItem("nterior_user")) {
+                        return (
+                            <>
+                                <NavBar />
+                                <h1>Nterior</h1>
+                                <ApplicationViews />
+                            </>
+                        );
+                    } else {
+                        return <Redirect to="/login" />;
+                    }
+                }}
+            />
+
+            <Route path="/login">
+                <Login />
+            </Route>
+            <Route path="/register">
+                <Register />
+            </Route>
         </>
     )
 }
+
