@@ -22,7 +22,7 @@ export const RequestList = () => {
                 designRequests.map(
                     (designRequestObj) => {
 
-                        return <ul>{designRequestObj.description}</ul>
+                        return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}</ul>
                     }
 
                 )
