@@ -16,19 +16,8 @@ export const DesignerList = () => {
         []
     )
 
-    useEffect(
-        () => {
-            if (users.designer === true && users.length === 1) {
-                updateMessage("You have 1 designer")
-            } else {
-                updateMessage(`You have ${users.length} designers.`)
-            }
-        },
-        [users]
-    )
-
     return (
-        <><div>{totalDesignerMessage}</div>
+        <>
             {
                 users.map(
                     (userObj) => {

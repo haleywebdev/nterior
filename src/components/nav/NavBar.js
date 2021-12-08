@@ -7,11 +7,11 @@ export const NavBar = (props) => {
         <ul className="navbar">
 
             <li className="navbar__item active">
-                <Link className="navbar__link" to="/customers">Customers</Link>
+                <Link className="navbar__link" to="/homepage">Home</Link>
             </li>
 
             <li className="navbar__item active">
-                <Link className="navbar__link" to="/designers">Designers</Link>
+                <Link className="navbar__link" to="/styles">Styles</Link>
             </li>
 
             <li className="navbar__item active">
@@ -19,14 +19,18 @@ export const NavBar = (props) => {
             </li>
 
             <li className="navbar__item active">
+                <Link className="navbar__link" to="/portfolio">My Portfolio</Link>
+            </li>
+
+            <li className="navbar__item active">
                 <Link className="navbar__link" to="#"
-                onClick={
-                    () => { 
-                        localStorage.removeItem("nterior_user")
-                    }
-                }>
+                    onClick={
+                        () => {
+                            localStorage.removeItem("nterior_user")
+                        }
+                    }>
                     Logout
-                    </Link>
+                </Link>
             </li>
 
         </ul>

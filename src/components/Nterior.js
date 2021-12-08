@@ -5,6 +5,8 @@ import { NavBar } from "./nav/NavBar";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./Nterior.css";
+import { Footer } from "./footer/Footer";
+import { Homepage } from "./homepage/Homepage";
 
 export const Nterior = () => {
 
@@ -16,9 +18,10 @@ export const Nterior = () => {
                     if (localStorage.getItem("nterior_user")) {
                         return (
                             <>
-                                <NavBar />
-                                <h1>Nterior</h1>
-                                <ApplicationViews />
+                                <NavBar /><center>
+                                    <ApplicationViews /></center>
+                                <Footer />
+
                             </>
                         );
                     } else {
