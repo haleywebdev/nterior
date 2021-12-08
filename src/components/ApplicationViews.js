@@ -5,6 +5,10 @@ import { Homepage } from "./homepage/Homepage"
 import { RequestForm } from "./requests/RequestForm"
 import { Style } from "./styles/Style"
 import { StylePost } from "./styles/StylePost"
+import { StylePostForm } from "./styles/StylePostForm"
+import { Register } from "./auth/Register"
+import { Login } from "./auth/Login"
+import { RequestList } from "./requests/RequestList"
 
 export const ApplicationViews = () => {
     return (
@@ -21,8 +25,24 @@ export const ApplicationViews = () => {
                 <StylePost />
             </Route>
 
+            <Route exact path="/posts/create">
+                <StylePostForm />
+            </Route>
+
             <Route exact path="/designRequests">
+                <RequestList />
+            </Route>
+
+            <Route exact path="/designRequests/create">
                 <RequestForm />
+            </Route>
+
+            <Route exact path="/register">
+                <Register />
+            </Route>
+
+            <Route exact path="/login">
+                <Login />
             </Route>
 
             <Route exact path="/hiring">
