@@ -33,7 +33,7 @@ export const StylePost = () => {
                 posts.map(
                     (postObj) => {
                         return <div>
-                            <img src={postObj.styleId.imageURL}  />
+                            <img src={postObj.imageURL}  />
                         </div>
 
                     }

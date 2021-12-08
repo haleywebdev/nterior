@@ -4,8 +4,9 @@ import { DesignerList } from "../designers/DesignerList"
 export const Homepage = () => {
     return (
     <>
-        <h1>Nterior</h1>
-        <p>A Nashville based interior design firm.</p>
+        {/* <img src="https://i.imgur.com/awNT8TA.png" /> */}
+        {/* <img src ="https://i.imgur.com/beuCWlt.png"/> */}
+        <img src="https://i.imgur.com/xmZimMU.png"/>
         <h3>Meet Our Designers</h3>
         <DesignerList /> 
         </>
