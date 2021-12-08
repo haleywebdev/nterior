@@ -41,8 +41,11 @@ export const Style = () => {
         <>
             <center>
                 <div>
-                    <h2>Styles</h2> {/* create a dropdown of locations */}
+                    <h2>Styles</h2> 
 
+                    <div>
+                <button onClick={() => history.push("/posts/create")}>Add A New Post</button>
+            </div>
 
                     {
                         styles.map(style => {

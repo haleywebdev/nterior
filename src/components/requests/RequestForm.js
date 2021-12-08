@@ -26,9 +26,9 @@ export const RequestForm = () => {
             userId: parseInt(localStorage.getItem("nterior_user")),
             designerId: setChosenDesigner,
             room: request.room,
-            windows: request.window,
-            doors: request.door, 
-            dimensions: request.dimension,
+            windows: request.windows,
+            doors: request.doors, 
+            dimensions: request.dimensions,
             description: request.description
         }
 

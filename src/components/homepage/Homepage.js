@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { DesignerList } from "../users/DesignerList"
+import { DesignerList } from "../designers/DesignerList"
 
 export const Homepage = () => {
     return (

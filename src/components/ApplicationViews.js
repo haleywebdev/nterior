@@ -5,6 +5,7 @@ import { Homepage } from "./homepage/Homepage"
 import { RequestForm } from "./requests/RequestForm"
 import { Style } from "./styles/Style"
 import { StylePost } from "./styles/StylePost"
+import { StylePostForm } from "./styles/StylePostForm"
 
 export const ApplicationViews = () => {
     return (
@@ -19,6 +20,10 @@ export const ApplicationViews = () => {
 
             <Route exact path="/posts/:styleId(\d+)">
                 <StylePost />
+            </Route>
+
+            <Route exact path="/posts/create">
+                <StylePostForm />
             </Route>
 
             <Route exact path="/designRequests">
