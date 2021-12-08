@@ -11,22 +11,15 @@ export const NavBar = (props) => {
             </li>
 
             <li className="navbar__item active">
-                <Link className="navbar__link" to="/styles">Styles</Link>
+                <Link className="navbar__link" to="/styles">Design Specialties</Link>
             </li>
 
             <li className="navbar__item active">
-                <Link className="navbar__link" to="/designRequests">Requests</Link>
+                <Link className="navbar__link" to="/designRequests">Submit A Design Request!</Link>
             </li>
 
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/portfolio">My Portfolio</Link>
-            </li>
-
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="/messages">
-
-                    <div class="notification__count">0 messages</div>
-                </Link>
             </li>
 
             <li className="navbar__item active">

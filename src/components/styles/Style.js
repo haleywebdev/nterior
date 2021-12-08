@@ -39,7 +39,7 @@ export const Style = () => {
     
     return (
         <>
-            <center>
+            
                 <div>
                     <h2>Styles</h2> 
 
@@ -56,7 +56,7 @@ export const Style = () => {
 
 
                 </div>
-            </center>
+            
 
 
         </>

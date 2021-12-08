@@ -58,7 +58,7 @@ export const Hiring = () => {
         const newUserForm = {
             name: user.name,
             email: user.email,
-            password: user.password, 
+            password: user.password,
             designer: user.designer
         }
 
@@ -82,7 +82,8 @@ export const Hiring = () => {
     return (
         <>
             <form className="hiringForm">
-                <h2 className="hiringForm">New Hire Application</h2>
+                <button><h2 className="hiringForm">New Hire Application</h2></button>
+                <p>Please create an account to fill out the application.</p>
 
                 <fieldset>
                     <div className="form-group">
@@ -103,8 +104,8 @@ export const Hiring = () => {
                         />
                     </div>
                 </fieldset>
-<fieldset>
-                <div className="form-group">
+                <fieldset>
+                    <div className="form-group">
                         <label htmlFor="name">Email:</label>
                         <input
                             onChange={
@@ -124,22 +125,22 @@ export const Hiring = () => {
                 </fieldset>
 
                 <fieldset><div className="form-group">
-                        <label htmlFor="name">Password:</label>
-                        <input
-                            onChange={
-                                (evt) => {
-                                    const copy = { ...user }
-                                    copy.password = evt.target.value
-                                    updateUser(copy)
-                                }
+                    <label htmlFor="name">Password:</label>
+                    <input
+                        onChange={
+                            (evt) => {
+                                const copy = { ...user }
+                                copy.password = evt.target.value
+                                updateUser(copy)
                             }
-                            required autoFocus
-                            type="password"
-                            id="name"
-                            className="form-control"
-                            placeholder="Enter A Password"
-                        />
-                    </div>
+                        }
+                        required autoFocus
+                        type="password"
+                        id="name"
+                        className="form-control"
+                        placeholder="Enter A Password"
+                    />
+                </div>
                 </fieldset>
 
                 <fieldset>

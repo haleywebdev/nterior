@@ -14,8 +14,8 @@ export const Nterior = () => {
 
                         return (
                             <>
-                                <NavBar /><center>
-                                    <ApplicationViews /></center>
+                                <NavBar />
+                                    <ApplicationViews />
                                 <Footer />
 
                             </>

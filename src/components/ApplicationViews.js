@@ -8,6 +8,7 @@ import { StylePost } from "./styles/StylePost"
 import { StylePostForm } from "./styles/StylePostForm"
 import { Register } from "./auth/Register"
 import { Login } from "./auth/Login"
+import { RequestList } from "./requests/RequestList"
 
 export const ApplicationViews = () => {
     return (
@@ -29,6 +30,10 @@ export const ApplicationViews = () => {
             </Route>
 
             <Route exact path="/designRequests">
+                <RequestList />
+            </Route>
+
+            <Route exact path="/designRequests/create">
                 <RequestForm />
             </Route>
 

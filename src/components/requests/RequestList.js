@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react"
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"
 
 export const RequestList = () => {
     const [designRequests, setDesignRequests] = useState([])
+    const history = useHistory()
 
     useEffect(
         () => {
@@ -17,7 +19,9 @@ export const RequestList = () => {
 
     return (
         <>
-
+<div>
+                <button onClick={() => history.push("/designRequests/create")}>Submit A Design Request</button>
+            </div>
             {
                 designRequests.map(
                     (designRequestObj) => {
