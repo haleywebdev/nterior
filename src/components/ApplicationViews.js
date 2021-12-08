@@ -6,6 +6,8 @@ import { RequestForm } from "./requests/RequestForm"
 import { Style } from "./styles/Style"
 import { StylePost } from "./styles/StylePost"
 import { StylePostForm } from "./styles/StylePostForm"
+import { Register } from "./auth/Register"
+import { Login } from "./auth/Login"
 
 export const ApplicationViews = () => {
     return (
@@ -28,6 +30,14 @@ export const ApplicationViews = () => {
 
             <Route exact path="/designRequests">
                 <RequestForm />
+            </Route>
+
+            <Route exact path="/register">
+                <Register />
+            </Route>
+
+            <Route exact path="/login">
+                <Login />
             </Route>
 
             <Route exact path="/hiring">

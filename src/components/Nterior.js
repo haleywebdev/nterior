@@ -10,12 +10,8 @@ import { Homepage } from "./homepage/Homepage";
 
 export const Nterior = () => {
 
-    return (
-        <>
+  
 
-            <Route
-                render={() => {
-                    if (localStorage.getItem("nterior_user")) {
                         return (
                             <>
                                 <NavBar /><center>
@@ -24,19 +20,14 @@ export const Nterior = () => {
 
                             </>
                         );
-                    } else {
-                        return <Redirect to="/login" />;
-                    }
-                }}
-            />
-
-            <Route path="/login">
-                <Login />
-            </Route>
-            <Route path="/register">
-                <Register />
-            </Route>
-        </>
-    )
+                    
+        
+            <><Route path="/login">
+        <Login />
+    </Route><Route path="/register">
+            <Register />
+        </Route></>
+        
+    
 }
 
