@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 
 export const DesignerList = () => {
     const [users, setUsers] = useState([])
-    const [totalDesignerMessage, updateMessage] = useState("")
 
     useEffect(
         () => {

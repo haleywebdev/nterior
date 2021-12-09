@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
-export const DesignerForm = () => {
+export const DesignerHiringForm = () => {
+    const history = useHistory()
     const [designer, updateDesigner] = useState({
         experience: "",
         availability: false,
@@ -29,17 +30,20 @@ export const DesignerForm = () => {
             body: JSON.stringify(newForm)
         }
 
-        // when something new has been created in the API, we want to send the user immediately back to the service tickets to see what has been added to the list.
-        // we use the history mechanism to programatically change it! 
-
         return fetch("http://localhost:8088/designers", fetchOption)
             .then(() => {
                 history.push("/designers")
             })
     }
 
+        // when something new has been created in the API, we want to send the user immediately back to the service tickets to see what has been added to the list.
+        // we use the history mechanism to programatically change it! 
+
+
     return (
-        <><fieldset>
+        <>
+        
+        <fieldset>
             <div className="form-group">
                 <label htmlFor="specialty">Experience:</label>
                 <input

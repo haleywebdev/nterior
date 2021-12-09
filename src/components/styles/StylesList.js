@@ -53,8 +53,6 @@ export const StyleList = () => {
         [styleId]
     )
 
-
-
     return (
         <>
 
