@@ -5,6 +5,7 @@ import "./Login.css"
 
 export const Login = () => {
     const [email, set] = useState("")
+    const [password, setPassword] = useState("")
     const existDialog = useRef()
     const history = useHistory()
 
@@ -20,7 +21,7 @@ export const Login = () => {
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("nterior_user", exists.id)
-                    history.push("/")
+                    history.push("/Homepage")
                 } else {
                     existDialog.current.showModal()
                 }
@@ -39,11 +40,19 @@ export const Login = () => {
                     <h1>Nterior</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
+                        <label htmlFor="inputEmail"> Email address: </label>
                         <input type="email"
                             onChange={evt => set(evt.target.value)}
                             className="form-control"
                             placeholder="Email address"
+                            required autoFocus />
+                    </fieldset>
+                    <fieldset>
+                        <label htmlFor="inputEmail"> Password: </label>
+                        <input type="password"
+                            onChange={evt => setPassword(evt.target.value)}
+                            className="form-control"
+                            placeholder="Password"
                             required autoFocus />
                     </fieldset>
                     <fieldset>

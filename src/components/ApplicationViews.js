@@ -1,6 +1,6 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { Hiring } from "./designers/HiringForm"
+import { Hiring, HiringForm } from "./designers/HiringForm"
 import { Homepage } from "./homepage/Homepage"
 import { RequestForm } from "./requests/RequestForm"
 import { Style } from "./styles/Style"
@@ -9,6 +9,8 @@ import { StylePostForm } from "./styles/StylePostForm"
 import { Register } from "./auth/Register"
 import { Login } from "./auth/Login"
 import { RequestList } from "./requests/RequestList"
+import { Nterior } from "./Nterior"
+import { Hire } from "./designers/Hiring"
 
 export const ApplicationViews = () => {
     return (
@@ -37,16 +39,16 @@ export const ApplicationViews = () => {
                 <RequestForm />
             </Route>
 
-            <Route exact path="/register">
-                <Register />
-            </Route>
-
             <Route exact path="/login">
                 <Login />
             </Route>
 
             <Route exact path="/hiring">
-                <Hiring />
+                <Hire />
+            </Route>
+
+            <Route exact path="/hiring/create">
+                <HiringForm />
             </Route>
         </>
     )

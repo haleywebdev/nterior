@@ -7,7 +7,7 @@ export const NavBar = (props) => {
         <><ul className="navbar">
 
             <li className="navbar__item active">
-                <Link className="navbar_link" to="/homepage"><img src="https://i.imgur.com/nuAVWfl.png" width="58" height="58"></img></Link>
+                <Link className="navbar_link" to="/Homepage"><img src="https://i.imgur.com/nuAVWfl.png" width="58" height="58"></img></Link>
             </li>
 
             <li className="navbar__item active">
@@ -30,7 +30,20 @@ export const NavBar = (props) => {
             <li className="navbar__item active">
                 <Link className="navbar__link" to="/register">
                     Create An Account
-                </Link></li></ul>
+                </Link></li>
+
+            <li className="navbar__item active">
+                <Link className="navbar__link" to="#"
+                    onClick={
+                        () => {
+                            localStorage.removeItem("nterior_user")
+                        }
+                    }>
+                    Logout
+                </Link>
+            </li>
+
+        </ul>
 
         </>
 

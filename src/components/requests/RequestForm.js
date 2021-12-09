@@ -2,21 +2,15 @@ import React, { useState, useEffect } from "react"
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"
 
 export const RequestForm = () => {
-    const [userDesigner, getDesigner] = useState([])
-    const [chosenDesigner, setChosenDesigner] = useState(0)
-
+    const [designers, getDesigners] = useState([])
+    const [styles, getStyles] = useState([])
     const [request, updateRequest] = useState({
-        userId: 1,
-        designerId: 1,
-        styleId: 1,
         room: "",
         windows: 6,
         doors: 2,
         dimensions: "",
         description: ""
     })
-
-    const { designerId } = useParams()
     const history = useHistory()
 
     // this is the object we want to send to the api
@@ -25,8 +19,8 @@ export const RequestForm = () => {
         evt.preventDefault()
         const newRequest = {
             userId: parseInt(localStorage.getItem("nterior_user")),
-            designerId: 1,
-            styleId: 1,
+            designerId: request.designer,
+            styleId: request.style,
             room: request.room,
             windows: request.windows,
             doors: request.doors,
@@ -53,67 +47,69 @@ export const RequestForm = () => {
 
     useEffect(
         () => {
-            return fetch(`http://localhost:8088/designers?_expand=user&userId=${designerId}`)
+            return fetch(`http://localhost:8088/designers?_expand=user`)
                 .then(res => res.json())
                 .then((designersArray) => {
-                    getDesigner(designersArray)
+                    getDesigners(designersArray)
                 })
         },
-        [designerId]
+        []
     )
+
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/styles`)
+                .then(res => res.json()) // converting JSON to JS data structure
+                .then((data) => {
+                    getStyles(data)
+                })
+        },
+        []  // Empty dependency array only reacts to JSX initial rendering.
+    )
+
 
     return (
         <>
             <form className="ticketForm">
                 <p>Please create an account in order to submit a request.</p>
+                
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="location">Designers: </label>
-                        <select value={request.designerId}
-                            onChange={
+                        <label htmlFor="location">Designer: </label>
+                        <select  onChange={
                                 (evt) => {
-                                    // you cannot directly modify state. you must make a copy of state using ...
                                     const copy = { ...request }
-                                    copy.designerId = evt.target.value
+                                    copy.designer = evt.target.value
                                     updateRequest(copy)
                                 }
-                            } >
-                            <option name="designers">Choose A Designer...</option>
-                            <option name="1">Wilfrid Pagac</option>
-                            <option name="2">Elody Brekke</option>
-                            <option name="3">Roderick Bernhard</option>
-                            <option name="4">Laurianne Senger</option>
-                            <option name="5">Emilie Parisian</option>
-                            <option name="6">Mozell Auer</option>
-                            <option name="7">Raquel Crona</option>
-                            <option name="8">Elyse Zboncak</option>
-                            <option name="9">Uriel Moen</option>
-                        </select></div></fieldset>
+                            }
+                        >
+                            <option value="0">Choose A Designer...</option>
+                            {designers.map(d => (
+                            <option key={d.id} value={d.id}>
+                                {d.user.name}
+                                </option> ))}
+                        </select>
+                    </div>
+                </fieldset>
 
                 <fieldset>
                     <div className="form-group">
                         <label htmlFor="location">Style: </label>
-                        <select value={request.styleId}
-                            onChange={
+                        <select  onChange={
                                 (evt) => {
-                                    // you cannot directly modify state. you must make a copy of state using ...
                                     const copy = { ...request }
-                                    copy.styleId = evt.target.value
+                                    copy.style = evt.target.value
                                     updateRequest(copy)
                                 }
-                            } >
-                            <option name="styles">Choose A Style...</option>
-                            <option name="modern">Modern</option>
-                            <option name="contemporary">Contemporary</option>
-                            <option name="mid-century">Mid-Century</option>
-                            <option name="art-deco">Art Deco</option>
-                            <option name="minimalist">Minimalist</option>
-                            <option name="Scandinavian">Scandinavian</option>
-                            <option name="Eclectic">Eclectic</option>
-                            <option name="Industrial">Industrial</option>
-                            <option name="Farmhouse">Farmhouse</option>
+                            }
+                        >
+                            <option value="0">Choose A Style...</option>
+                            {styles.map(s => (
+                            <option key={s.id} value={s.id}>
+                                {s.style}
+                                </option> ))}
                         </select>
-
                     </div>
                 </fieldset>
 
@@ -153,7 +149,6 @@ export const RequestForm = () => {
                             }
                             required autoFocus
                             type="number"
-                            id="hourly"
                             className="form-control"
                             placeholder="Please enter the number of windows in the room"
                         />
@@ -173,7 +168,6 @@ export const RequestForm = () => {
                             }
                             required autoFocus
                             type="number"
-                            id="hourly"
                             className="form-control"
                             placeholder="Please enter the number of doors in the room"
                         />
@@ -182,7 +176,7 @@ export const RequestForm = () => {
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="description">Description:</label>
+                        <label htmlFor="description">Dimensions:</label>
                         <input
                             onChange={
                                 (evt) => {
@@ -193,7 +187,7 @@ export const RequestForm = () => {
                             }
                             required autoFocus
                             type="text"
-                            id="desription"
+                            id="dimensions"
                             className="form-control"
                             placeholder="Please enter the dimensions of the room, in feet"
                         />

@@ -6,28 +6,41 @@ import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./Nterior.css";
 import { Footer } from "./footer/Footer";
+import { DesignerList } from "./designers/DesignerList"
 import { Homepage } from "./homepage/Homepage";
 
 export const Nterior = () => {
 
-  
-
+    return (
+        <>
+            <Route
+                render={() => {
+                    if (localStorage.getItem("nterior_user")) {
                         return (
                             <>
                                 <NavBar />
-                                    <ApplicationViews />
-                                <Footer />
 
+                                <ApplicationViews />
+
+                                <Footer />
                             </>
                         );
-                    
-        
-            <><Route path="/login">
-        <Login />
-    </Route><Route path="/register">
-            <Register />
-        </Route></>
-        
-    
+                    } else {
+                        return <Redirect to="/login" />;
+                    }
+                }}
+            />
+
+            <Route path="/login">
+                <Login />
+            </Route>
+            <Route path="/register">
+                <Register />
+            </Route>
+
+        </>
+
+
+    )
 }
 
