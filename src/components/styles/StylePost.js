@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom/cjs/react-router-dom.min"
 
 export const StylePost = () => {
-    const [post, set] = useState({})
-    const [posts, getPosts] = useState([])  // State variable for current ticket object
+    const [posts, set] = useState([])
+      // State variable for current ticket object
     const { styleId } = useParams()  // Variable storing the route parameter
 
 
@@ -18,13 +18,9 @@ export const StylePost = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/posts`)
-                .then(res => res.json()) // converting JSON to JS data structure
-                .then((data) => {
-                    getPosts(data)
-                })
+            fetch("http:localhost:8088/posts")
         },
-        []  // Empty dependency array only reacts to JSX initial rendering.
+        []
     )
 
     return (
@@ -32,7 +28,7 @@ export const StylePost = () => {
             {
                 posts.map(
                     (postObj) => {
-                        return <div>
+                        return <div key={`postObj--${postObj.style?.id}`}>
                             <img src={postObj.imageURL}  />
                         </div>
 

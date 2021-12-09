@@ -1,12 +1,12 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 export const StylePostForm = () => {
 
     const [post, updatePost] = useState({
-        styleId: 1,
         imageURL: ""
     })
+    const [styles, defineStyles] = useState([])
 
     const history = useHistory()
 
@@ -15,7 +15,7 @@ export const StylePostForm = () => {
     const submitForm = (evt) => {
         evt.preventDefault()
         const newForm = {
-            styleId: post.styleId,
+            styleId: post.style,
             imageURL: post.imageURL
         }
 
@@ -36,6 +36,17 @@ export const StylePostForm = () => {
             })
     }
 
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/styles`)
+                .then(res => res.json()) // converting JSON to JS data structure
+                .then((data) => {
+                    defineStyles(data)
+                })
+        },
+        []  // Empty dependency array only reacts to JSX initial rendering.
+    )
+
     return (
         <>
             <form className="hireForm">
@@ -44,27 +55,20 @@ export const StylePostForm = () => {
                 <fieldset>
                     <div className="form-group">
                         <label htmlFor="location">Style: </label>
-                        <select value={post.styleId}
-                            onChange={
+                        <select  onChange={
                                 (evt) => {
-                                    // you cannot directly modify state. you must make a copy of state using ...
                                     const copy = { ...post }
-                                    copy.styleId = evt.target.value
+                                    copy.style = evt.target.value
                                     updatePost(copy)
                                 }
-                            } >
-                            <option name="styles">Choose A Style...</option>
-                            <option name="modern">Modern</option>
-                            <option name="contemporary">Contemporary</option>
-                            <option name="mid-century">Mid-Century</option>
-                            <option name="art-deco">Art Deco</option>
-                            <option name="minimalist">Minimalist</option>
-                            <option name="Scandinavian">Scandinavian</option>
-                            <option name="Eclectic">Eclectic</option>
-                            <option name="Industrial">Industrial</option>
-                            <option name="Farmhouse">Farmhouse</option>
+                            }
+                        >
+                            <option value="0">Choose A Style...</option>
+                            {styles.map(s => (
+                            <option key={s.id} value={s.id}>
+                                {s.style}
+                                </option> ))}
                         </select>
-
                     </div>
                 </fieldset>
 
@@ -81,7 +85,6 @@ export const StylePostForm = () => {
                             }
                             required autoFocus
                             type="url"
-                            id="hourly"
                             className="form-control"
                         />
                     </div>
