@@ -4,10 +4,8 @@ import { ApplicationViews } from "./ApplicationViews";
 import { NavBar } from "./nav/NavBar";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
-import "./Nterior.css";
 import { Footer } from "./footer/Footer";
-import { DesignerList } from "./designers/DesignerList"
-import { Homepage } from "./homepage/Homepage";
+import "./Nterior.css";
 
 export const Nterior = () => {
 
@@ -21,8 +19,6 @@ export const Nterior = () => {
                                 <NavBar />
 
                                 <ApplicationViews />
-
-                                <Footer />
                             </>
                         );
                     } else {
@@ -37,7 +33,7 @@ export const Nterior = () => {
             <Route path="/register">
                 <Register />
             </Route>
-
+            <Footer />
         </>
 
 

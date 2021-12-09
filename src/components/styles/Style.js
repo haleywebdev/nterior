@@ -6,17 +6,10 @@ export const Style = () => {
 
     const [styles, getStyle] = useState([])
 
-    const { styleId } = useParams()  // Variable storing the route parameter
-
     const history = useHistory() // We can access and manipulate the current state of the browser history.
     // We can use this object to redirect the user to another page by calling history.push('/example-route')
     // history is a "prop" used to move from the current page to another one.
 
-
-    // Fetch the individual location when the productLocationId route parameter value changes
-
-
-    // Fetch all locations
     useEffect(
         () => {
             fetch(`http://localhost:8088/styles`)
@@ -35,8 +28,6 @@ export const Style = () => {
         }
     )
 
-    // Function to invoke when a <link> customer is chosen from the list of current orders
-    
     return (
         <>
             

@@ -1,16 +1,14 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { Hiring, HiringForm } from "./designers/HiringForm"
 import { Homepage } from "./homepage/Homepage"
 import { RequestForm } from "./requests/RequestForm"
 import { Style } from "./styles/Style"
 import { StylePost } from "./styles/StylePost"
 import { StylePostForm } from "./styles/StylePostForm"
-import { Register } from "./auth/Register"
 import { Login } from "./auth/Login"
 import { RequestList } from "./requests/RequestList"
-import { Nterior } from "./Nterior"
 import { Hire } from "./designers/Hiring"
+import { DesignerHiringForm } from "./designers/DesignerHiringForm"
 
 export const ApplicationViews = () => {
     return (
@@ -48,8 +46,10 @@ export const ApplicationViews = () => {
             </Route>
 
             <Route exact path="/hiring/create">
-                <HiringForm />
+                <DesignerHiringForm />
             </Route>
+
+
         </>
     )
 }
