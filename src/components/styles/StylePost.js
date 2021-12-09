@@ -15,16 +15,13 @@ export const StylePost = () => {
         [styleId]
     )
 
-    const [favorite, updateFavorite] = useState({
-        postId: 0,
-        userId: 0
-    })
+    const [favorite, updateFavorite] = useState({})
     const history = useHistory()
 
     const submitFavorite = (evt) => {
         evt.preventDefault()
         const newFavorite = {
-            postId: favorite.postId,
+            postId: favorite.post,
             userId: parseInt(localStorage.getItem("nterior_user"))
         }
 
@@ -44,7 +41,7 @@ export const StylePost = () => {
                 history.push("/favorites")
             })
     }
-
+    
     return (
         <>
             <div className="image-list">
@@ -52,14 +49,13 @@ export const StylePost = () => {
                     posts.map(
                         (postObj) => {
                             return <div className="container">
-                                <img src={postObj.imageURL} alt="images" className="image" />
-                                <div className="middle">
-                                    <button className="text" onChange={(evt) => {
+                                <img key={postObj.id} src={postObj.imageURL} alt="images" className="image" />
+                                    <div className="middle"> <button onChange={(evt) => {
                                         const copy = { ...favorite }
-                                        copy.postId = evt.target.value
+                                        copy.post = evt.target.value
                                         updateFavorite(copy)
-                                    }} onClick={submitFavorite}>Favorite</button>
-                                </div>
+                                    }} onClick={submitFavorite}>Favorite</button></div>
+                                
                             </div>
 
                         }
