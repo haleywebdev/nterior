@@ -5,6 +5,8 @@ export const RequestForm = () => {
     const [designers, getDesigners] = useState([])
     const [styles, getStyles] = useState([])
     const [request, updateRequest] = useState({
+        designerId: 0,
+        styleId: 0,
         room: "",
         windows: 6,
         doors: 2,

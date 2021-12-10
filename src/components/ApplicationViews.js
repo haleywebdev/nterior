@@ -9,6 +9,8 @@ import { Login } from "./auth/Login"
 import { RequestList } from "./requests/RequestList"
 import { Hire } from "./designers/Hiring"
 import { DesignerHiringForm } from "./designers/DesignerHiringForm"
+import { Portfolio } from "./portfolio/Portfolio"
+import { MessageForm } from "./portfolio/MessageForm"
 
 export const ApplicationViews = () => {
     return (
@@ -30,11 +32,19 @@ export const ApplicationViews = () => {
             </Route>
 
             <Route exact path="/designRequests">
-                <RequestList />
+                <RequestForm />
             </Route>
 
             <Route exact path="/designRequests/create">
                 <RequestForm />
+            </Route>
+
+            <Route exact path="/portfolio">
+                <Portfolio />
+            </Route>
+
+            <Route exact path="/messages/create">
+                <MessageForm />
             </Route>
 
             <Route exact path="/login">

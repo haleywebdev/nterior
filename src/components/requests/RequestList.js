@@ -20,17 +20,8 @@ export const RequestList = () => {
     return (
         <>
 <div>
-                <button onClick={() => history.push("/designRequests/create")}>Submit A Design Request</button>
+                <button onClick={() => history.push("/designRequests/create")}>Request A Design!</button>
             </div>
-            {
-                designRequests.map(
-                    (designRequestObj) => {
-
-                        return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}</ul>
-                    }
-
-                )
-            }
         </>
     )
 }
