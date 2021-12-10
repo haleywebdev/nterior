@@ -13,7 +13,11 @@ export const StylePostForm = () => {
     const submitForm = (evt) => {
         evt.preventDefault()
         const newForm = {
+<<<<<<< HEAD
             styleId: parseInt(evt.target.value),
+=======
+            styleId: post.styleId,
+>>>>>>> faa78714070743b892d4b16140b1624a2d575c93
             imageURL: post.imageURL
         }
 
