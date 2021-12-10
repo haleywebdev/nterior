@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 export const StylePostForm = () => {
 
     const [post, updatePost] = useState({
+        styleId: 0,
         imageURL: ""
     })
     const [styles, defineStyles] = useState([])
@@ -13,11 +14,7 @@ export const StylePostForm = () => {
     const submitForm = (evt) => {
         evt.preventDefault()
         const newForm = {
-<<<<<<< HEAD
-            styleId: parseInt(evt.target.value),
-=======
             styleId: post.styleId,
->>>>>>> faa78714070743b892d4b16140b1624a2d575c93
             imageURL: post.imageURL
         }
 

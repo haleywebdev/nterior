@@ -5,6 +5,8 @@ export const RequestForm = () => {
     const [designers, getDesigners] = useState([])
     const [styles, getStyles] = useState([])
     const [request, updateRequest] = useState({
+        designerId: 0,
+        styleId: 0,
         room: "",
         windows: 6,
         doors: 2,
@@ -19,13 +21,8 @@ export const RequestForm = () => {
         evt.preventDefault()
         const newRequest = {
             userId: parseInt(localStorage.getItem("nterior_user")),
-<<<<<<< HEAD
-            designerId: parseInt(evt.target.value),
-            styleId: parseInt(evt.target.value),
-=======
             designerId: request.designerId,
             styleId: request.styleId,
->>>>>>> faa78714070743b892d4b16140b1624a2d575c93
             room: request.room,
             windows: request.windows,
             doors: request.doors,

@@ -14,7 +14,7 @@ export const MessageForm = () => {
         evt.preventDefault()
         const newMessage = {
             userId: parseInt(localStorage.getItem("nterior_user")),
-            designerId: parseInt(evt.target.id),
+            designerId: message.designerId,
             messageText: message.messageText,
             read: message.read
         }
@@ -55,7 +55,7 @@ export const MessageForm = () => {
                         <select onChange={
                             (evt) => {
                                 const copy = { ...message }
-                                copy.designerId = parseInt(evt.target.id)
+                                copy.designerId = parseInt(evt.target.value)
                                 updateMessage(copy)
                             }
                         }
