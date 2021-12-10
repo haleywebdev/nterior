@@ -75,9 +75,6 @@ export const Portfolio = () => {
                 {
                     favorites.map(
                         (favoriteObj) => {
-                            favorites.find((favorite) => {
-                                return currentUserId === favoriteObj.userId
-                            })
                             return <div key={`favorite--${favoriteObj.id}`}><img src={favoriteObj.imageURL} /></div>
                         }
                     )
