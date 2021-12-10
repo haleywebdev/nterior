@@ -14,7 +14,7 @@ export const StylePostForm = () => {
     const submitForm = (evt) => {
         evt.preventDefault()
         const newForm = {
-            styleId: post.style,
+            styleId: post.styleId,
             imageURL: post.imageURL
         }
 
@@ -54,7 +54,7 @@ export const StylePostForm = () => {
                         <select  onChange={
                                 (evt) => {
                                     const copy = { ...post }
-                                    copy.style = evt.target.value
+                                    copy.styleId = parseInt(evt.target.value)
                                     updatePost(copy)
                                 }
                             }

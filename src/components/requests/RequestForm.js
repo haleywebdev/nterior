@@ -19,8 +19,8 @@ export const RequestForm = () => {
         evt.preventDefault()
         const newRequest = {
             userId: parseInt(localStorage.getItem("nterior_user")),
-            designerId: request.designer,
-            styleId: request.style,
+            designerId: request.designerId,
+            styleId: request.styleId,
             room: request.room,
             windows: request.windows,
             doors: request.doors,
@@ -79,7 +79,7 @@ export const RequestForm = () => {
                         <select  onChange={
                                 (evt) => {
                                     const copy = { ...request }
-                                    copy.designer = evt.target.value
+                                    copy.designerId = parseInt(evt.target.value)
                                     updateRequest(copy)
                                 }
                             }
@@ -99,7 +99,7 @@ export const RequestForm = () => {
                         <select  onChange={
                                 (evt) => {
                                     const copy = { ...request }
-                                    copy.style = evt.target.value
+                                    copy.styleId = parseInt(evt.target.value)
                                     updateRequest(copy)
                                 }
                             }
