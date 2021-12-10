@@ -4,15 +4,15 @@ import "./Footer.css"
 
 export const Footer = (props) => {
     return (
-        <ul className="navbar">
+        <div className="footer">
 
-            <footer><p>(c) Nterior Design, a Nashville based interior design firm.</p>
+            <div className="footer__item">© Nterior Design, a Nashville based interior design firm.</div>
 
-            <li className="navbar__item active">
+            <div className="footer__item">
                 <Link className="navbar__link" to="/hiring">Join Our Firm!</Link>
-            </li></footer>
+            </div>
 
 
-        </ul>
+        </div>
     )
 }

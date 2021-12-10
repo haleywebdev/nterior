@@ -89,8 +89,8 @@ export const Register = (props) => {
                             }
                         }
                         defaultChecked={user.designer}
-                        type="checkbox" name="employee" id="employee" />
-                    <label htmlFor="employee"> Designer account? </label>
+                        type="checkbox" name="designer" id="designer" />
+                    <label htmlFor="designer"> Designer account? </label>
                 </fieldset>
                 <fieldset>
                     <button type="submit"> Register </button>

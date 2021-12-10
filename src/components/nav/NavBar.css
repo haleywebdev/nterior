@@ -9,11 +9,15 @@
     width: 100%;
     background-color: whitesmoke;
     margin: auto;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: "Monsterrat";
 }
 
 .navigation__item {
     vertical-align: baseline;
     padding: 1em 0 0.5em 1em;
+    text-decoration: none;
 }
 
 .navigation__name {
@@ -21,13 +25,17 @@
     font-family: 'Monsterrat', sans-serif;
     padding-left: 0.5rem;
     padding-top: 0.1rem;
+    text-decoration: none;
 }
 
 .navigation__icon > img {
     height: 2rem;
+    text-decoration: none;
 }
 
 
 .navigation__logout {
     margin-right: 2em;
+    text-decoration: none;
 }
+
