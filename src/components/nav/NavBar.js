@@ -4,7 +4,9 @@ import "./NavBar.css"
 
 export const NavBar = (props) => {
     return (
-        <><nav className="navigation">
+        <>
+        
+        <nav className="navigation">
 
             <div className="navigation__icon">
                 <Link className="navbar_link" to="/Homepage"><img src="https://i.imgur.com/nuAVWfl.png" width="58" height="58"></img></Link>
