@@ -19,8 +19,8 @@ export const RequestForm = () => {
         evt.preventDefault()
         const newRequest = {
             userId: parseInt(localStorage.getItem("nterior_user")),
-            designerId: request.designer,
-            styleId: request.style,
+            designerId: parseInt(evt.target.value),
+            styleId: parseInt(evt.target.value),
             room: request.room,
             windows: request.windows,
             doors: request.doors,

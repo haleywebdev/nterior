@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 export const StylePostForm = () => {
 
     const [post, updatePost] = useState({
-        styleId: 0,
         imageURL: ""
     })
     const [styles, defineStyles] = useState([])
@@ -14,7 +13,7 @@ export const StylePostForm = () => {
     const submitForm = (evt) => {
         evt.preventDefault()
         const newForm = {
-            styleId: post.style,
+            styleId: parseInt(evt.target.value),
             imageURL: post.imageURL
         }
 
@@ -54,7 +53,7 @@ export const StylePostForm = () => {
                         <select  onChange={
                                 (evt) => {
                                     const copy = { ...post }
-                                    copy.style = evt.target.value
+                                    copy.styleId = parseInt(evt.target.value)
                                     updatePost(copy)
                                 }
                             }

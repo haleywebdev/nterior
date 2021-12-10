@@ -16,8 +16,6 @@ export const StylePost = () => {
         [styleId]
     )
 
-    const [favorite, updateFavorite] = useState({
-    })
     const history = useHistory()
 
     const submitFavorite = (evt) => {
