@@ -13,30 +13,21 @@ export const Nterior = () => {
         <>
             <Route
                 render={() => {
-                    if (localStorage.getItem("nterior_user")) {
-                        return (
-                            <>
-                                <NavBar />
+                    return (
+                        <>
+                            <NavBar />
+                            <ApplicationViews />
+                        </>
+                    )
+                }} />
 
-                                <ApplicationViews />
-                            </>
-                        );
-                    } else {
-                        return <Redirect to="/login" />;
-                    }
-                }}
-            />
-
-            <Route path="/login">
-                <Login />
-            </Route>
-            <Route path="/register">
-                <Register />
-            </Route>
+           
             <Footer />
         </>
 
 
     )
 }
+
+
 

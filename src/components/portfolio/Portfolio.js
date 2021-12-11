@@ -6,7 +6,8 @@ export const Portfolio = () => {
     const [favorites, setFavorites] = useState([])
     const [posts, getPosts] = useState([])
     const [messages, setMessages] = useState([])
-    const currentUserId = parseInt(localStorage.getItem("nterior_user"))
+    const [users, setUsers] = useState()
+    const currentUser = parseInt(localStorage.getItem("nterior_user"))
     const history = useHistory()
     const { postId } = useParams()
 
@@ -56,47 +57,77 @@ export const Portfolio = () => {
         [postId]
     )
 
+    const getCurrentUser = () => {
+        return fetch(`http://localhost:8088/users?id=${currentUser}`)
+            .then(res => res.json())
+            .then(response => setUsers(response[0]))
+
+    }
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
+
     return (
         <> <h1>My Portfolio</h1>
 
-            <div><h3>My Requests</h3>
-                {
-                    designRequests.map(
-                        (designRequestObj) => {
+            {
+                users?.designer ?
 
-                            return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}</ul>
-                        }
+                    <><div><h3>Pending Requests</h3>
+                        {designRequests.map(
+                            (designRequestObj) => {
 
-                    )
-                }</div>
+                                return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}</ul>
+                            }
 
-            <div><h3>My Favorites</h3>
+                        )}</div>
 
-                {
-                    favorites.map(
-                        (favoriteObj) => {
-                            return <div key={`favorite--${favoriteObj.id}`}><img src={favoriteObj.imageURL} /></div>
-                        }
-                    )
-                }
+                        <div><h3>Completed Requests</h3></div>
 
-            </div>
+                        <div><h3>My Messages</h3>
+                            <div>
+                                <button onClick={() => history.push("/messages/create")}>Send A New Message</button>
+                            </div>
 
+                            {messages.map(
+                                (messageObj) => {
+                                    return <><div key={`message--${messageObj.id}`}>{messageObj.messageText}</div><button>Delete</button></>
+                                }
+                            )}
 
-            <div><h3>My Messages</h3>
-            <div>
-                <button onClick={() => history.push("/messages/create")}>Send A New Message</button>
-            </div>
+                        </div></>
+                    :
 
-                {
-                    messages.map(
-                        (messageObj) => {
-                            return <><div key={`message--${messageObj.id}`}>{messageObj.messageText}</div><button>Delete</button></>
-                        }
-                    )
-                }
+                    <>
+                        <div><h3>My Requests</h3>
+                            {designRequests.map(
+                                (designRequestObj) => {
 
-            </div>
+                                    return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}</ul>
+                                }
+
+                            )}</div><div><h3>My Favorites</h3>
+
+                            {favorites.map(
+                                (favoriteObj) => {
+                                    return <div key={`favorite--${favoriteObj.id}`}><img src={favoriteObj.imageURL} /></div>
+                                }
+                            )}
+
+                        </div><div><h3>My Messages</h3>
+                            <div>
+                                <button onClick={() => history.push("/messages/create")}>Send A New Message</button>
+                            </div>
+
+                            {messages.map(
+                                (messageObj) => {
+                                    return <><div key={`message--${messageObj.id}`}>{messageObj.messageText}</div><button>Delete</button></>
+                                }
+                            )}
+
+                        </div></>
+            }
         </>
     )
 }

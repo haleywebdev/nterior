@@ -24,6 +24,7 @@ export const Login = () => {
                     history.push("/Homepage")
                 } else {
                     existDialog.current.showModal()
+                    history.push("/Homepage")
                 }
             })
     }

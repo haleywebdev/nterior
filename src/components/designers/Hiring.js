@@ -1,10 +1,21 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { useHistory } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom/cjs/react-router-dom.min"
 
 export const Hire = () => {
 
-    const history = useHistory()
+
+    const [users, setUsers] = useState()
+    const currentUser = parseInt(localStorage.getItem("nterior_user"))
+
+    const getCurrentUser = () => {
+        return fetch(`http://localhost:8088/users?id=${currentUser}`)
+            .then(res => res.json())
+            .then(response => setUsers(response[0]))
+    }
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
 
     return (
         <>
@@ -12,13 +23,6 @@ export const Hire = () => {
             <div>
                 <h2>Join Our Firm!</h2>
                 <p>In order to submit an application, <Link to={`/register`}>please create an account.</Link></p>
-
-                <div>
-                    <button onClick={() => history.push("/hiring/create")}>New Hire Application</button>
-                </div>
-
-
-
 
             </div>
 

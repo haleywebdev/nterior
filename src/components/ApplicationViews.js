@@ -35,10 +35,6 @@ export const ApplicationViews = () => {
                 <RequestForm />
             </Route>
 
-            <Route exact path="/designRequests/create">
-                <RequestForm />
-            </Route>
-
             <Route exact path="/portfolio">
                 <Portfolio />
             </Route>
@@ -52,10 +48,6 @@ export const ApplicationViews = () => {
             </Route>
 
             <Route exact path="/hiring">
-                <Hire />
-            </Route>
-
-            <Route exact path="/hiring/create">
                 <DesignerHiringForm />
             </Route>
 
