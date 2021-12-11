@@ -6,11 +6,10 @@ import { Style } from "./styles/Style"
 import { StylePost } from "./styles/StylePost"
 import { StylePostForm } from "./styles/StylePostForm"
 import { Login } from "./auth/Login"
-import { RequestList } from "./requests/RequestList"
-import { Hire } from "./designers/Hiring"
 import { DesignerHiringForm } from "./designers/DesignerHiringForm"
 import { Portfolio } from "./portfolio/Portfolio"
 import { MessageForm } from "./portfolio/MessageForm"
+import { Register } from "./auth/Register"
 
 export const ApplicationViews = () => {
     return (
@@ -45,6 +44,10 @@ export const ApplicationViews = () => {
 
             <Route exact path="/login">
                 <Login />
+            </Route>
+
+            <Route exact path="/register">
+                <Register />
             </Route>
 
             <Route exact path="/hiring">
