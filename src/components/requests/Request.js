@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useHistory } from "react-router-dom"
-import { getAllTickets } from "../ApiManager"
 
-export const Ticket = () => {
-    const [request, completeRequest] = useState({})  // State variable for current ticket object
-    const { requestId } = useParams()  // Variable storing the route parameter
+export const Request = () => {
+    const [request, completeRequest] = useState({})
+    const [designRequests, getDesignRequests] = useState([])
+    const [users, setUsers] = useState()
+    const currentUser = parseInt(localStorage.getItem("nterior_user"))
+    const { requestId } = useParams()
     const history = useHistory()
 
-
-    // Fetch the individual ticket when the ticketId route parameter value changes
     useEffect(
         () => {
-            return fetch(`http://localhost:8088/designRequests/${requestId}`)
+            return fetch(`http://localhost:8088/designRequests/${requestId}?_expand=user&_expand=designer&_expand=style`)
                 .then(response => response.json())
                 .then((data) => {
                     completeRequest(data)
@@ -21,17 +21,12 @@ export const Ticket = () => {
         [requestId]
     )
 
-    const getAllRequests = () => {
-        return fetch("http://localhost:8088/designRequests")
-            .then(res => res.json())
-    }
-
-    const completeRequest = (evt) => {
+    const Req = (evt) => {
 
         const updatedRequest = {
             userId: parseInt(localStorage.getItem("nterior_user")),
-            designerId: parseInt(evt.target.value),
-            styleId: parseInt(evt.target.value),
+            designerId: request.designerId,
+            styleId: request.designerId,
             room: request.room,
             windows: request.windows,
             doors: request.doors,
@@ -39,7 +34,7 @@ export const Ticket = () => {
             description: request.description,
             completed: true
         }
-        fetch(`http://localhost:8088/completeRequests/${requestId}`, {
+        fetch(`http://localhost:8088/designRequests/${requestId}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json"
@@ -47,26 +42,82 @@ export const Ticket = () => {
             body: JSON.stringify(updatedRequest)
         })
             .then(() => {
-                history.push("/designRequests")
+                history.push("/portfolio")
             })
     }
 
+    const getCurrentUser = () => {
+        return fetch(`http://localhost:8088/users?id=${currentUser}`)
+            .then(res => res.json())
+            .then(response => setUsers(response[0]))
+    }
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
+
+    const fetchRequests = () => {
+        fetch(`http://localhost:8088/designRequests?_expand=user`)
+            .then(res => res.json())
+            .then((request) => {
+                getDesignRequests(request)
+            }
+            )
+    }
+
+    useEffect(
+        () => {
+            fetchRequests()
+        }, []
+    )
+
+    const deleteRequest = (id) => {
+        fetch(`http://localhost:8088/designRequests/${id}`, {
+            method: "DELETE"
+        })
+            .then(
+                () => {
+                    fetchRequests()
+                }
+            )
+            .then(() => {
+                history.push("/portfolio")
+            })
+    }
+
+
     return (
         <>
-            <h2>Ticket Details</h2>
-            <section className="ticket">
-                <h3 className="ticket__description">{ticket.description}</h3>
-                <div className="ticket__customer">Submitted by {ticket.customer?.name}</div>
-                <div className="ticket__employee">Assigned to
-                    <select id="employee"
-                        value={ticket.employeeId}
-                        onChange={assignEmployee}>
-                        {
-                            employees.map(e => <option key={`employee--${e.id}`} value={e.id}>{e.name}</option>)
-                        }
-                    </select>
-                </div>
+            <h2>Request Details</h2>
+
+            <section className="">
+                <div className="request__user">Submitted by {request.user?.name}</div>
+                <div className="request__designer">Designed by {request.user?.name}</div>
+                <div className="request__style">Style: {request.style?.style}</div>
+                <div className="request__room">Room: {request.room}</div>
+                <div className="request__windows">Windows: {request.windows}</div>
+                <div className="request__doors">Doors: {request.doors}</div>
+                <div className="request__dimensions">Dimensions: {request.dimensions}</div>
+                <div className="request__description">Description: {request.description}</div>
+                {
+                    users?.designer ?
+
+                        <div className="request__completed">
+                            <button
+                                id="comp"
+                                value={request.completed}
+                                onClick={Req}>Mark As Complete</button></div>
+
+                        :
+
+                        <><button>Edit Request</button><button onClick={() => { deleteRequest(request.id) }}>Cancel Request</button></>
+
+                }
             </section>
+
+
+
+
         </>
     )
 }

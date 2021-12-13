@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min"
+import { Link } from "react-router-dom"
 
 export const Portfolio = () => {
     const [designRequests, getDesignRequests] = useState([])
     const [favorites, getFavorites] = useState([])
     const [messages, getMessages] = useState([])
-    const [request, compReq] = useState({})
     const [users, setUsers] = useState()
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
     const history = useHistory()
     const { requestId } = useParams()
 
     const fetchRequests = () => {
-        fetch(`http://localhost:8088/designRequests/${requestId}?_expand=user`)
+        fetch(`http://localhost:8088/designRequests?_expand=user`)
             .then(res => res.json())
             .then((request) => {
-                compReq(request)
+                getDesignRequests(request)
             }
             )
     }
@@ -23,19 +23,8 @@ export const Portfolio = () => {
     useEffect(
         () => {
             fetchRequests()
-        }, [requestId]
+        }, []
     )
-
-    const deleteRequest = (id) => {
-        fetch(`http://localhost:8088/designRequests/${id}`, {
-            method: "DELETE"
-        })
-            .then(
-                () => {
-                    fetchRequests()
-                }
-            )
-    }
 
     const fetchFavorites = () => {
         return fetch(`http://localhost:8088/favorites?_expand=user&_expand=post`)
@@ -109,9 +98,8 @@ export const Portfolio = () => {
                     <><div><h3>Pending Requests</h3>
                         {designRequests.map(
                             (designRequestObj) => {
-                                if (users?.id === designRequestObj.userId) {
-                                return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}
-                                    <button>Complete</button></ul>
+                                if (users?.id === designRequestObj.userId && designRequestObj.completed === false) {
+                                    return <ul key={`request--${designRequestObj.id}`}><Link to={`/designRequests/${designRequestObj.id}`}>{designRequestObj.description}</Link></ul>
                                 }
                             }
 
@@ -119,7 +107,14 @@ export const Portfolio = () => {
 
                         <div><h3>Completed Requests</h3>
 
+                            {designRequests.map(
+                                (designRequestObj) => {
+                                    if (users?.id === designRequestObj.userId && designRequestObj.completed === true) {
+                                        return <ul key={`request--${designRequestObj.id}`}><Link to={`/designRequests/${designRequestObj.id}`}>{designRequestObj.description}</Link></ul>
+                                    }
+                                }
 
+                            )}
 
                         </div>
 
@@ -128,9 +123,24 @@ export const Portfolio = () => {
                                 <button onClick={() => history.push("/messages/create")}>Send A New Message</button>
                             </div>
 
+                            <h4>Unread Messages</h4>
+
                             {messages.map(
                                 (messageObj) => {
-                                    if (users?.id === messageObj.userId) {
+                                    if (users?.id === messageObj.userId && messageObj.read === false) {
+                                        return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
+                                            <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
+                                    }
+
+                                }
+
+                            )}
+
+                            <h4>Read Messages</h4>
+
+                            {messages.map(
+                                (messageObj) => {
+                                    if (users?.id === messageObj.userId && messageObj.read === true) {
                                         return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
                                             <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
                                     }
@@ -147,8 +157,8 @@ export const Portfolio = () => {
                             {designRequests.map(
                                 (designRequestObj) => {
                                     if (users?.id === designRequestObj.userId) {
-                                        return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}
-                                            <button onClick={() => { deleteRequest(designRequestObj.id) }}>Cancel Request</button></ul>
+                                        return <ul key={`request--${designRequestObj.id}`}><Link to={`/designRequests/${designRequestObj.id}`}>{designRequestObj.description}</Link>
+                                        </ul>
                                     }
                                 }
 

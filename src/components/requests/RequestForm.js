@@ -11,7 +11,8 @@ export const RequestForm = () => {
         windows: 6,
         doors: 2,
         dimensions: "",
-        description: ""
+        description: "",
+        completed: false
     })
     const history = useHistory()
 
@@ -40,7 +41,8 @@ export const RequestForm = () => {
             windows: request.windows,
             doors: request.doors,
             dimensions: request.dimensions,
-            description: request.description
+            description: request.description,
+            completed: request.completed
         }
 
         const fetchOption = {
