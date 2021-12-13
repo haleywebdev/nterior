@@ -34,6 +34,10 @@ export const ApplicationViews = () => {
                 <RequestForm />
             </Route>
 
+            <Route exact path="/designRequests/:requestId(\d+)">
+                <Portfolio />
+            </Route>
+
             <Route exact path="/portfolio">
                 <Portfolio />
             </Route>

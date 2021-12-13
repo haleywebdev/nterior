@@ -5,42 +5,119 @@ export const Portfolio = () => {
     const [designRequests, getDesignRequests] = useState([])
     const [favorites, getFavorites] = useState([])
     const [messages, getMessages] = useState([])
+    const [request, compReq] = useState({})
     const [users, setUsers] = useState()
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
     const history = useHistory()
+    const { requestId } = useParams()
+
+    const fetchRequests = () => {
+        fetch(`http://localhost:8088/designRequests/${requestId}?_expand=user`)
+            .then(res => res.json())
+            .then((request) => {
+                compReq(request)
+            }
+            )
+    }
 
     useEffect(
         () => {
-            fetch("http://localhost:8088/designRequests?_expand=user")
-                .then(res => res.json())
-                .then((designRequestsArray) => {
-                    getDesignRequests(designRequestsArray)
-                }
-                )
-        }, []
+            fetchRequests()
+        }, [requestId]
     )
 
+    const deleteRequest = (id) => {
+        fetch(`http://localhost:8088/designRequests/${id}`, {
+            method: "DELETE"
+        })
+            .then(
+                () => {
+                    fetchRequests()
+                }
+            )
+    }
+
+    const completeRequest = (evt) => {
+
+        const updatedRequest = {
+            userId: parseInt(localStorage.getItem("nterior_user")),
+            designerId: parseInt(evt.target.value),
+            styleId: parseInt(evt.target.value),
+            room: request.room,
+            windows: request.windows,
+            doors: request.doors,
+            dimensions: request.dimensions,
+            description: request.description,
+            completed: true
+        }
+            fetch(`http://localhost:8088/completeRequests/${requestId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(updatedRequest)
+            })
+                .then(() => {
+                    history.push("/designRequests")
+                })
+                .then(
+                    () => {
+                        fetchRequests()
+                    }
+                )
+        }
+
+    const fetchFavorites = () => {
+        return fetch(`http://localhost:8088/favorites?_expand=user&_expand=post`)
+            .then(res => res.json())
+            .then((favorite) => {
+                getFavorites(favorite)
+            })
+    }
+
     useEffect(
         () => {
-            return fetch(`http://localhost:8088/favorites?_expand=user&_expand=post`)
-                .then(res => res.json())
-                .then((designersArray) => {
-                    getFavorites(designersArray)
-                })
+            fetchFavorites()
         },
         []
     )
 
+    const deleteFavorite = (id) => {
+        fetch(`http://localhost:8088/favorites/${id}`, {
+            method: "DELETE"
+        })
+            .then(
+                () => {
+                    fetchFavorites()
+                }
+            )
+    }
+
+    const fetchMessages = () => {
+        fetch("http://localhost:8088/messages?_expand=user")
+            .then(res => res.json())
+            .then((message) => {
+                getMessages(message)
+            }
+            )
+    }
+
     useEffect(
         () => {
-            fetch("http://localhost:8088/messages?_expand=user")
-                .then(res => res.json())
-                .then((message) => {
-                    getMessages(message)
-                }
-                )
+            fetchMessages()
         }, []
     )
+
+    const deleteMessage = (id) => {
+        fetch(`http://localhost:8088/messages/${id}`, {
+            method: "DELETE"
+        })
+            .then(
+                () => {
+                    fetchMessages()
+                }
+            )
+    }
 
     const getCurrentUser = () => {
         return fetch(`http://localhost:8088/users?id=${currentUser}`)
@@ -52,6 +129,7 @@ export const Portfolio = () => {
         getCurrentUser()
     }, [])
 
+
     return (
         <> <h1>My Portfolio</h1>
 
@@ -61,17 +139,20 @@ export const Portfolio = () => {
                     <><div><h3>Pending Requests</h3>
                         {designRequests.map(
                             (designRequestObj) => {
-                                if (users?.id === designRequestObj.userId) {
-                                    return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}</ul>
-                                }
+                                // if (users?.id === designRequestObj.userId) {
+                                return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}
+                                    <button id="request"
+                                    value={designRequestObj.id}
+                                    onChange={completeRequest}>Complete</button></ul>
+                                // }
                             }
 
                         )}</div>
 
                         <div><h3>Completed Requests</h3>
-                        
-                        
-                        
+
+
+
                         </div>
 
                         <div><h3>My Messages</h3>
@@ -82,7 +163,8 @@ export const Portfolio = () => {
                             {messages.map(
                                 (messageObj) => {
                                     if (users?.id === messageObj.userId) {
-                                        return <ul key={`message--${messageObj.id}`}>{messageObj.messageText}</ul>
+                                        return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
+                                            <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
                                     }
 
                                 }
@@ -97,7 +179,8 @@ export const Portfolio = () => {
                             {designRequests.map(
                                 (designRequestObj) => {
                                     if (users?.id === designRequestObj.userId) {
-                                        return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}</ul>
+                                        return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}
+                                            <button onClick={() => { deleteRequest(designRequestObj.id) }}>Cancel Request</button></ul>
                                     }
                                 }
 
@@ -108,7 +191,8 @@ export const Portfolio = () => {
                             <div className="container">{favorites.map(
                                 (favoriteObj) => {
                                     if (users?.id === favoriteObj.userId) {
-                                        return <img src={favoriteObj.post?.imageURL} width="200" height="auto" alt="" />
+                                        return <><img src={favoriteObj.post?.imageURL} width="200" height="auto" alt="" />
+                                            <button onClick={() => { deleteFavorite(favoriteObj.id) }}>Delete</button></>
                                     }
 
                                 }
@@ -123,7 +207,8 @@ export const Portfolio = () => {
                             {messages.map(
                                 (messageObj) => {
                                     if (users?.id === messageObj.userId) {
-                                        return <ul key={`message--${messageObj.id}`}>{messageObj.messageText}</ul>
+                                        return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
+                                            <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
                                     }
 
                                 }
