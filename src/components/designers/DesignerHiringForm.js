@@ -50,10 +50,6 @@ export const DesignerHiringForm = () => {
             })
     }
 
-    // when something new has been created in the API, we want to send the user immediately back to the service tickets to see what has been added to the list.
-    // we use the history mechanism to programatically change it! 
-
-
     return (
         <> <h2>Join Our Firm!</h2>
             {

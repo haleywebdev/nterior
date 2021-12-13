@@ -19,8 +19,7 @@ export const Portfolio = () => {
                     setDesignRequests(designRequestsArray)
                 }
                 )
-        },
-        []
+        }, []
     )
 
     useEffect(
@@ -31,8 +30,7 @@ export const Portfolio = () => {
                     setFavorites(fave)
                 }
                 )
-        },
-        []
+        }, []
     )
 
     useEffect(
@@ -43,8 +41,7 @@ export const Portfolio = () => {
                     setMessages(message)
                 }
                 )
-        },
-        []
+        }, []
     )
 
     useEffect(
@@ -111,7 +108,7 @@ export const Portfolio = () => {
 
                             {favorites.map(
                                 (favoriteObj) => {
-                                    return <div key={`favorite--${favoriteObj.id}`}><img src={favoriteObj.imageURL} /></div>
+                                    return <img src={favoriteObj.post?.imageURL} alt="" />
                                 }
                             )}
 

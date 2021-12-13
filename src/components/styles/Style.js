@@ -21,7 +21,7 @@ export const Style = () => {
     useEffect(
         () => {
             fetch(`http://localhost:8088/posts`)
-        }
+        }, []
     )
 
     const getCurrentUser = () => {
@@ -44,7 +44,6 @@ export const Style = () => {
                     <div>
                         <button onClick={() => history.push("/posts/create")}>Add A New Post</button>
                     </div> :
-
 
                     styles.map(style => {
                         return <ul key={`style--${style.id}`}><Link to={`/posts/${style.id}`}>{style.style}</Link></ul>
