@@ -29,7 +29,7 @@ export const MessageForm = () => {
 
         return fetch("http://localhost:8088/messages", fetchOption)
             .then(() => {
-                history.push("/messages")
+                history.push("/portfolio")
             })
     }
 
