@@ -56,7 +56,7 @@ export const RequestForm = () => {
 
         return fetch("http://localhost:8088/designRequests", fetchOption)
             .then(() => {
-                history.push("/designRequests")
+                history.push("/portfolio")
             })
     }
 

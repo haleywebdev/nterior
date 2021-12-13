@@ -43,8 +43,6 @@ export const NavBar = (props) => {
 
                         :
 
-
-
                         <><div className="navigation__icon">
                             <Link className="navbar_link" to="/Homepage"><img alt="" src="https://i.imgur.com/nuAVWfl.png" width="58" height="58"></img></Link>
                         </div><div className="navigation__item active">
@@ -62,11 +60,7 @@ export const NavBar = (props) => {
                 }
             </nav>
 
-
         </>
-
-
-
 
     )
 }

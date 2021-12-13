@@ -35,7 +35,7 @@ export const StylePost = () => {
 
         return fetch("http://localhost:8088/favorites", fetchOption)
             .then(() => {
-                history.push("/favorites")
+                history.push(`/posts/${styleId}`)
             })
     }
 
