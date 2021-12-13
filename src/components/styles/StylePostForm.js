@@ -28,7 +28,7 @@ export const StylePostForm = () => {
 
         return fetch("http://localhost:8088/posts", fetchOption)
             .then(() => {
-                history.push("/posts")
+                history.push("/styles")
             })
     }
 
