@@ -37,36 +37,6 @@ export const Portfolio = () => {
             )
     }
 
-    const completeRequest = (evt) => {
-
-        const updatedRequest = {
-            userId: parseInt(localStorage.getItem("nterior_user")),
-            designerId: parseInt(evt.target.value),
-            styleId: parseInt(evt.target.value),
-            room: request.room,
-            windows: request.windows,
-            doors: request.doors,
-            dimensions: request.dimensions,
-            description: request.description,
-            completed: true
-        }
-            fetch(`http://localhost:8088/completeRequests/${requestId}`, {
-                method: "PUT",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify(updatedRequest)
-            })
-                .then(() => {
-                    history.push("/designRequests")
-                })
-                .then(
-                    () => {
-                        fetchRequests()
-                    }
-                )
-        }
-
     const fetchFavorites = () => {
         return fetch(`http://localhost:8088/favorites?_expand=user&_expand=post`)
             .then(res => res.json())
@@ -139,12 +109,10 @@ export const Portfolio = () => {
                     <><div><h3>Pending Requests</h3>
                         {designRequests.map(
                             (designRequestObj) => {
-                                // if (users?.id === designRequestObj.userId) {
+                                if (users?.id === designRequestObj.userId) {
                                 return <ul key={`request--${designRequestObj.id}`}>{designRequestObj.description}
-                                    <button id="request"
-                                    value={designRequestObj.id}
-                                    onChange={completeRequest}>Complete</button></ul>
-                                // }
+                                    <button>Complete</button></ul>
+                                }
                             }
 
                         )}</div>
