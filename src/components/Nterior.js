@@ -6,6 +6,7 @@ import { Footer } from "./footer/Footer";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./Nterior.css";
+import { Homepage } from "./homepage/Homepage";
 
 export const Nterior = () => {
 
@@ -26,11 +27,17 @@ export const Nterior = () => {
                 }} />
 
             <Footer />
+
             <Route path="/login">
                 <Login />
-            </Route><Route path="/register">
+            </Route>
+            
+
+            <Route path="/register">
                 <Register />
-            </Route></>
+            </Route>
+            
+            </>
 
     )
 }

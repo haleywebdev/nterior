@@ -32,8 +32,7 @@ export const DesignerHiringForm = () => {
             experience: designer.experience,
             availability: designer.availability,
             fullTime: designer.fullTime,
-            rate: designer.rate,
-            manager: designer.manager
+            rate: designer.rate
         }
 
         const fetchOption = {
@@ -46,7 +45,7 @@ export const DesignerHiringForm = () => {
 
         return fetch("http://localhost:8088/designers", fetchOption)
             .then(() => {
-                history.push("/designers")
+                history.push("/homepage")
             })
     }
 
@@ -72,7 +71,9 @@ export const DesignerHiringForm = () => {
                                     className="form-control"
                                     placeholder="Years of Experience" />
                             </div>
-                        </fieldset><fieldset>
+                        </fieldset>
+                        
+                        {/* <fieldset>
                             <div className="form-group">
                                 <label htmlFor="manager">Are You Applying for A Manager Position?</label>
                                 <input
@@ -83,7 +84,9 @@ export const DesignerHiringForm = () => {
                                     }}
                                     type="checkbox" />
                             </div>
-                        </fieldset><fieldset>
+                        </fieldset> */}
+                        
+                        <fieldset>
                             <div className="form-group">
                                 <label htmlFor="name">Preferred Pay Rate: </label>
                                 <input

@@ -9,7 +9,6 @@ export const Portfolio = () => {
     const [users, setUsers] = useState()
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
     const history = useHistory()
-    const { requestId } = useParams()
 
     const fetchRequests = () => {
         fetch(`http://localhost:8088/designRequests?_expand=user`)
@@ -81,7 +80,7 @@ export const Portfolio = () => {
     const getCurrentUser = () => {
         return fetch(`http://localhost:8088/users?id=${currentUser}`)
             .then(res => res.json())
-            .then(response => setUsers(response[0]))
+            .then(data => setUsers(data))
     }
 
     useEffect(() => {
@@ -128,19 +127,6 @@ export const Portfolio = () => {
                             {messages.map(
                                 (messageObj) => {
                                     if (users?.id === messageObj.userId && messageObj.read === false) {
-                                        return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
-                                            <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
-                                    }
-
-                                }
-
-                            )}
-
-                            <h4>Read Messages</h4>
-
-                            {messages.map(
-                                (messageObj) => {
-                                    if (users?.id === messageObj.userId && messageObj.read === true) {
                                         return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
                                             <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
                                     }

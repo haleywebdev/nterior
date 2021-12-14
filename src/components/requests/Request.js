@@ -8,7 +8,7 @@ export const Request = () => {
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
     const { requestId } = useParams()
     const history = useHistory()
-
+        
     useEffect(
         () => {
             return fetch(`http://localhost:8088/designRequests/${requestId}?_expand=user&_expand=designer&_expand=style`)
@@ -49,7 +49,7 @@ export const Request = () => {
     const getCurrentUser = () => {
         return fetch(`http://localhost:8088/users?id=${currentUser}`)
             .then(res => res.json())
-            .then(response => setUsers(response[0]))
+            .then(data => setUsers(data[0]))
     }
 
     useEffect(() => {
@@ -92,7 +92,6 @@ export const Request = () => {
 
             <section className="">
                 <div className="request__user">Submitted by {request.user?.name}</div>
-                <div className="request__designer">Designed by {request.user?.name}</div>
                 <div className="request__style">Style: {request.style?.style}</div>
                 <div className="request__room">Room: {request.room}</div>
                 <div className="request__windows">Windows: {request.windows}</div>
@@ -110,7 +109,7 @@ export const Request = () => {
 
                         :
 
-                        <><button>Edit Request</button><button onClick={() => { deleteRequest(request.id) }}>Cancel Request</button></>
+                        <><button onClick={() => { deleteRequest(request.id) }}>Cancel Request</button></>
 
                 }
             </section>
