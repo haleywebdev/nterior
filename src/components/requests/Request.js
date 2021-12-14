@@ -4,6 +4,7 @@ import { useParams, useHistory } from "react-router-dom"
 export const Request = () => {
     const [request, completeRequest] = useState({})
     const [designRequests, getDesignRequests] = useState([])
+    const [designer, getDesigner] = useState([])
     const [users, setUsers] = useState()
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
     const { requestId } = useParams()
@@ -85,13 +86,33 @@ export const Request = () => {
             })
     }
 
+    useEffect(
+        () => {
+            fetch("http://localhost:8088/designers?_expand=user")
+                .then(res => res.json())
+                .then((des) => {
+                    getDesigner(des)
+                }
+                )
+        }, []
+    )
 
     return (
         <>
             <h2>Request Details</h2>
 
             <section className="">
-                <div className="request__user">Submitted by {request.user?.name}</div>
+                <div className="request__user">Submitted by: {request.user?.name}</div>
+                <div className="request_designer">
+                {
+                designer.map(
+                    (d) => {
+                        if (users.id === d.userId && d.user.designer === true) {
+                            return <div key={`d--${d.id}`}>Designed by: {d.user.name}
+                            </div>
+                        }
+                    })}
+                    </div>
                 <div className="request__style">Style: {request.style?.style}</div>
                 <div className="request__room">Room: {request.room}</div>
                 <div className="request__windows">Windows: {request.windows}</div>

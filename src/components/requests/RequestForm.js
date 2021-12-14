@@ -5,8 +5,8 @@ export const RequestForm = () => {
     const [designers, getDesigners] = useState([])
     const [styles, getStyles] = useState([])
     const [request, updateRequest] = useState({
-        designerId: 0,
-        styleId: 0,
+        designerId: "",
+        styleId: "",
         room: "",
         windows: 6,
         doors: 2,
@@ -28,8 +28,6 @@ export const RequestForm = () => {
     useEffect(() => {
         getCurrentUser()
     }, [])
-
-    // this is the object we want to send to the api
 
     const submitRequest = (evt) => {
         evt.preventDefault()
@@ -53,9 +51,6 @@ export const RequestForm = () => {
             body: JSON.stringify(newRequest)
         }
 
-        // when something new has been created in the API, we want to send the user immediately back to the service tickets to see what has been added to the list.
-        // we use the history mechanism to programatically change it! 
-
         return fetch("http://localhost:8088/designRequests", fetchOption)
             .then(() => {
                 history.push("/portfolio")
@@ -76,12 +71,12 @@ export const RequestForm = () => {
     useEffect(
         () => {
             fetch(`http://localhost:8088/styles`)
-                .then(res => res.json()) // converting JSON to JS data structure
+                .then(res => res.json()) 
                 .then((data) => {
                     getStyles(data)
                 })
         },
-        []  // Empty dependency array only reacts to JSX initial rendering.
+        [] 
     )
 
 

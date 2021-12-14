@@ -9,6 +9,7 @@ export const Portfolio = () => {
     const [users, setUsers] = useState()
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
     const history = useHistory()
+    const { requestId } = useParams()
 
     const fetchRequests = () => {
         fetch(`http://localhost:8088/designRequests?_expand=user`)
@@ -80,7 +81,7 @@ export const Portfolio = () => {
     const getCurrentUser = () => {
         return fetch(`http://localhost:8088/users?id=${currentUser}`)
             .then(res => res.json())
-            .then(data => setUsers(data))
+            .then(response => setUsers(response[0]))
     }
 
     useEffect(() => {
@@ -97,36 +98,30 @@ export const Portfolio = () => {
                     <><div><h3>Pending Requests</h3>
                         {designRequests.map(
                             (designRequestObj) => {
-                                if (users?.id === designRequestObj.userId && designRequestObj.completed === false) {
+                                if (users?.id === designRequestObj.designerId && designRequestObj.completed === false) {
                                     return <ul key={`request--${designRequestObj.id}`}><Link to={`/designRequests/${designRequestObj.id}`}>{designRequestObj.description}</Link></ul>
                                 }
                             }
-
                         )}</div>
 
                         <div><h3>Completed Requests</h3>
-
                             {designRequests.map(
                                 (designRequestObj) => {
-                                    if (users?.id === designRequestObj.userId && designRequestObj.completed === true) {
+                                    if (users?.id === designRequestObj.designerId && designRequestObj.completed === true) {
                                         return <ul key={`request--${designRequestObj.id}`}><Link to={`/designRequests/${designRequestObj.id}`}>{designRequestObj.description}</Link></ul>
                                     }
                                 }
-
                             )}
-
                         </div>
 
                         <div><h3>My Messages</h3>
                             <div>
                                 <button onClick={() => history.push("/messages/create")}>Send A New Message</button>
                             </div>
-
                             <h4>Unread Messages</h4>
-
                             {messages.map(
                                 (messageObj) => {
-                                    if (users?.id === messageObj.userId && messageObj.read === false) {
+                                    if (users?.id === messageObj.designerId && messageObj.read === false) {
                                         return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
                                             <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
                                     }
@@ -134,7 +129,6 @@ export const Portfolio = () => {
                                 }
 
                             )}
-
                         </div></>
                     :
 
@@ -147,11 +141,9 @@ export const Portfolio = () => {
                                         </ul>
                                     }
                                 }
-
                             )}</div>
 
                         <div><h3>My Favorites</h3>
-
                             <div className="container">{favorites.map(
                                 (favoriteObj) => {
                                     if (users?.id === favoriteObj.userId) {
@@ -160,17 +152,16 @@ export const Portfolio = () => {
                                     }
 
                                 }
-
                             )}</div>
 
                         </div><div><h3>My Messages</h3>
                             <div>
                                 <button onClick={() => history.push("/messages/create")}>Send A New Message</button>
                             </div>
-
+                            <h4>Received Messages</h4>
                             {messages.map(
                                 (messageObj) => {
-                                    if (users?.id === messageObj.userId) {
+                                    if (users?.id === messageObj.userId && messageObj.read === false) {
                                         return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
                                             <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
                                     }
@@ -178,7 +169,6 @@ export const Portfolio = () => {
                                 }
 
                             )}
-
                         </div></>
             }
         </>

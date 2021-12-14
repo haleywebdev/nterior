@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 export const MessageForm = () => {
     const [message, updateMessage] = useState({
-        designerId: 0,
+        designerId: "",
         messageText: "",
         read: false
     })
