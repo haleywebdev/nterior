@@ -27,7 +27,7 @@ export const RequestForm = () => {
 
     useEffect(() => {
         getCurrentUser()
-    }, [])
+    }, []) 
 
     const submitRequest = (evt) => {
         evt.preventDefault()
@@ -71,12 +71,12 @@ export const RequestForm = () => {
     useEffect(
         () => {
             fetch(`http://localhost:8088/styles`)
-                .then(res => res.json()) 
+                .then(res => res.json())
                 .then((data) => {
                     getStyles(data)
                 })
         },
-        [] 
+        []
     )
 
 
@@ -90,6 +90,7 @@ export const RequestForm = () => {
                             <label htmlFor="location">Designer: </label>
                             <select onChange={
                                 (evt) => {
+                                
                                     const copy = { ...request }
                                     copy.designerId = parseInt(evt.target.value)
                                     updateRequest(copy)

@@ -1,3 +1,5 @@
+// The purpsoe of this module is to render the form for a user to fill out to become a designer for the firm.
+
 import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
