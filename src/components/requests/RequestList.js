@@ -20,7 +20,7 @@ export const RequestList = () => {
     return (
         <>
 <div>
-                <button onClick={() => history.push("/designRequests/create")}>Request A Design!</button>
+                <button onClick={() => history.push("/designRequests")}>Request A Design!</button>
             </div>
         </>
     )

@@ -1,31 +1,32 @@
 import React, { useEffect, useState } from "react"
 
 export const DesignerList = () => {
-    const [users, setUsers] = useState([])
+    const [designer, getDesigner] = useState([])
+
 
     useEffect(
         () => {
-            fetch("http://localhost:8088/users")
+            fetch("http://localhost:8088/designers?_expand=user")
                 .then(res => res.json())
-                .then((usersArray) => {
-                    setUsers(usersArray)
+                .then((des) => {
+                    getDesigner(des)
                 }
                 )
-        },
-        []
+        }, []
     )
 
     return (
         <>
             {
-                users.map(
-                    (userObj) => {
-                        if (userObj.designer === true) {
-                            return <ul key={`user--${userObj.id}`}>{userObj.name}</ul>
+                designer.map(
+                    (d) => {
+                        if (d.user.designer === true) {
+                            return <div key={`d--${d.id}`}><b>{d.user.name}</b>
+                                <div>Experience: {d.experience}</div>
+                                <div>Availability: {d.availability.toString()}</div>
+                            </div>
                         }
-
-                    })
-            }
+                    })}
         </>
     )
 }

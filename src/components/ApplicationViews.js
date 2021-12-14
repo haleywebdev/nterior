@@ -10,6 +10,7 @@ import { DesignerHiringForm } from "./designers/DesignerHiringForm"
 import { Portfolio } from "./portfolio/Portfolio"
 import { MessageForm } from "./portfolio/MessageForm"
 import { Register } from "./auth/Register"
+import { Request } from "./requests/Request"
 
 export const ApplicationViews = () => {
     return (
@@ -32,6 +33,10 @@ export const ApplicationViews = () => {
 
             <Route exact path="/designRequests">
                 <RequestForm />
+            </Route>
+
+            <Route exact path="/designRequests/:requestId(\d+)">
+                <Request />
             </Route>
 
             <Route exact path="/portfolio">
