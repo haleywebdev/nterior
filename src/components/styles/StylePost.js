@@ -3,6 +3,8 @@ import { useParams, useHistory } from "react-router-dom/cjs/react-router-dom.min
 
 import "./StylePost.css"
 
+// this component renders the individual style details/posts so that a user can pick an image as a favorite
+
 export const StylePost = () => {
     const [posts, set] = useState([])
     const { styleId } = useParams()

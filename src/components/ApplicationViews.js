@@ -23,6 +23,8 @@ export const ApplicationViews = () => {
                 <Style />
             </Route>
 
+            {/* this listens for the user clicking on a style to view the style details */}
+
             <Route exact path="/posts/:styleId(\d+)">
                 <StylePost />
             </Route>

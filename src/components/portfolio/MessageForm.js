@@ -1,3 +1,11 @@
+// this module contains the React component to render the message form 
+// the initial state is set to an object with the properties of a message object, whose initial values are either empty strings or a boolean
+// submitMessage is an event that captures the transient state when the button is clicked (as the user is interacting with the app and making selections)
+// using the HTTP request/method to POST the data (permanently) to json
+// after the data is posted, we have to fetch the data again since the data has changed
+// we re-render the dom and send the user back to the correct route (in this case, route the user back to the portfolio page).
+// on the portfolio page, the new message is displayed 
+
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
+// this component renders the style post form for a designer to upload a new style post image
+
 export const StylePostForm = () => {
 
     const [post, updatePost] = useState({

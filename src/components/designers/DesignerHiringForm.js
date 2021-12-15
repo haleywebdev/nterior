@@ -74,7 +74,7 @@ export const DesignerHiringForm = () => {
                                     placeholder="Years of Experience" />
                             </div>
                         </fieldset>
-                        
+
                         <fieldset>
                             <div className="form-group">
                                 <label htmlFor="name">Preferred Pay Rate: </label>
@@ -121,7 +121,8 @@ export const DesignerHiringForm = () => {
 
                     <div><p>In order to submit an application, <Link to={`/register`}>please create an account.</Link></p>
 
-                    </div>}
+                    </div>
+            }
         </>
 
     )

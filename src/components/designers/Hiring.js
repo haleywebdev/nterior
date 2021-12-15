@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom/cjs/react-router-dom.min"
 
-export const Hire = () => {
+// this component renders what the user will see when they click on the hiring link in the footer
 
+export const Hire = () => {
 
     const [users, setUsers] = useState()
     const currentUser = parseInt(localStorage.getItem("nterior_user"))

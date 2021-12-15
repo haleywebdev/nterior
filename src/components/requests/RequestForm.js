@@ -1,9 +1,13 @@
+// this module contains the React component to render the request form 
+
 import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 export const RequestForm = () => {
     const [designers, getDesigners] = useState([])
     const [styles, getStyles] = useState([])
+
+    // the initial state request is set to an object containing the necessary properties of a request object, whose values are pre-provided
     const [request, updateRequest] = useState({
         designerId: "",
         styleId: "",
@@ -18,6 +22,7 @@ export const RequestForm = () => {
 
     const [users, setUsers] = useState()
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
+    // this is used to get the current user id stored in local, so that the views of different components can be adjusted based on the user's role
 
     const getCurrentUser = () => {
         return fetch(`http://localhost:8088/users?id=${currentUser}`)
@@ -27,7 +32,9 @@ export const RequestForm = () => {
 
     useEffect(() => {
         getCurrentUser()
-    }, []) 
+    }, [])
+
+    //submitRequest function performs the POST operation
 
     const submitRequest = (evt) => {
         evt.preventDefault()
@@ -43,6 +50,8 @@ export const RequestForm = () => {
             completed: request.completed
         }
 
+        // as the user makes their selections, it is captured in the new request object above. At this point, it's only transient state.
+
         const fetchOption = {
             method: "POST",
             headers: {
@@ -51,11 +60,17 @@ export const RequestForm = () => {
             body: JSON.stringify(newRequest)
         }
 
+        // the object is posted to state permanently using a POST method 
+
         return fetch("http://localhost:8088/designRequests", fetchOption)
             .then(() => {
                 history.push("/portfolio")
             })
     }
+
+    // the designRequests state must be fetched again after new data is posted permanently
+    // the user is routed back to their portfolio using history. 
+    // the useHistory hook grants you the ability to programtically manipulate the browser URL without needing a Link component
 
     useEffect(
         () => {
@@ -79,6 +94,12 @@ export const RequestForm = () => {
         []
     )
 
+    // the form captures the correct property values with an onChange
+    // with the onChange event, we first make a copy of the data 
+    // then, the value of that property is converted and copied in the request object 
+
+    // the submitRequest function is invoked in the onClick of the button, 
+    // as soon as the button is clicked, transient state is now permanent 
 
     return (
         <><h3>Submit A Design Request!</h3>
@@ -90,7 +111,7 @@ export const RequestForm = () => {
                             <label htmlFor="location">Designer: </label>
                             <select onChange={
                                 (evt) => {
-                                
+
                                     const copy = { ...request }
                                     copy.designerId = parseInt(evt.target.value)
                                     updateRequest(copy)

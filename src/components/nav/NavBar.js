@@ -2,6 +2,8 @@ import { Link } from "react-router-dom"
 import React, { useEffect, useState } from "react"
 import "./NavBar.css"
 
+// controller component
+
 export const NavBar = (props) => {
 
     const [users, setUsers] = useState()
@@ -16,6 +18,9 @@ export const NavBar = (props) => {
     useEffect(() => {
         getCurrentUser()
     }, [])
+
+    // using conditional JSX, the navbar renders different based on the user role 
+    // When a user clicks on a link in the navbar, the matching component is rendered
 
     return (
         <>

@@ -1,6 +1,6 @@
 import React from "react"
 import { DesignerList } from "../designers/DesignerList"
-import { RequestList } from "../requests/RequestList"
+import { Request } from "../requests/Request"
 
 export const Homepage = () => {
     return (
@@ -14,7 +14,7 @@ export const Homepage = () => {
 
             <p><center><h3>Meet Our Designers</h3></center></p>
             <center><DesignerList /></center>
-            <p><center><RequestList /></center></p>
+            <p><center><Request /></center></p>
         </>
 
     )

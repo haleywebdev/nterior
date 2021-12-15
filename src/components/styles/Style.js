@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Link, useHistory } from "react-router-dom"
 
+// this component renders the styles page with links and the button for designers to add a new style post
+
 export const Style = () => {
     const [styles, getStyle] = useState([])
     const [users, setUsers] = useState()
@@ -49,7 +51,7 @@ export const Style = () => {
                         return <ul key={`style--${style.id}`}><Link to={`/posts/${style.id}`}>{style.style}</Link></ul>
                     })
 
-            }
+            } {/* using Link to dynamically route the user to the style details when the link is clicked */}
 
 
 

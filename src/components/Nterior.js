@@ -6,7 +6,11 @@ import { Footer } from "./footer/Footer";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./Nterior.css";
-import { Homepage } from "./homepage/Homepage";
+
+// our React component renders JSX
+// React converts the JSX to JavaScript and then renders the HTML
+
+// In this component, we return the navbar, application views, and login/logout
 
 export const Nterior = () => {
 

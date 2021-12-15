@@ -129,11 +129,10 @@ export const Portfolio = () => {
                             <div>
                                 <button onClick={() => history.push("/messages/create")}>Send A New Message</button>
                             </div>
-                            <h4>Unread Messages</h4>
                             {messages.map(
                                 (messageObj) => {
                                     if (designer) {
-                                        if (designer.id === messageObj.userId && messageObj.read === false) {
+                                        if (designer.id === messageObj.designerId && messageObj.read === false) {
                                             return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
                                                 <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
                                         }
@@ -171,7 +170,6 @@ export const Portfolio = () => {
                             <div>
                                 <button onClick={() => history.push("/messages/create")}>Send A New Message</button>
                             </div>
-                            <h4>Unread Messages</h4>
                             {messages.map(
                                 (messageObj) => {
                                     if (user?.id === messageObj.userId && messageObj.read === false) {
