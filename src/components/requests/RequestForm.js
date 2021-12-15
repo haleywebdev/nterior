@@ -9,8 +9,8 @@ export const RequestForm = () => {
 
     // the initial state request is set to an object containing the necessary properties of a request object, whose values are pre-provided
     const [request, updateRequest] = useState({
-        designerId: "",
-        styleId: "",
+        designerId: 1,
+        styleId: 2,
         room: "",
         windows: 6,
         doors: 2,
@@ -177,7 +177,7 @@ export const RequestForm = () => {
                                 onChange={
                                     (evt) => {
                                         const copy = { ...request }
-                                        copy.windows = evt.target.value
+                                        copy.windows = parseInt(evt.target.value)
                                         updateRequest(copy)
                                     }
                                 }
@@ -196,7 +196,7 @@ export const RequestForm = () => {
                                 onChange={
                                     (evt) => {
                                         const copy = { ...request }
-                                        copy.doors = evt.target.value
+                                        copy.doors = parseInt(evt.target.value)
                                         updateRequest(copy)
                                     }
                                 }

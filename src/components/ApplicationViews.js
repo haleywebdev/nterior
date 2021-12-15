@@ -10,7 +10,7 @@ import { DesignerHiringForm } from "./designers/DesignerHiringForm"
 import { Portfolio } from "./portfolio/Portfolio"
 import { MessageForm } from "./portfolio/MessageForm"
 import { Register } from "./auth/Register"
-import { Request } from "./requests/Request"
+import { RequestList } from "./requests/RequestList"
 
 export const ApplicationViews = () => {
     return (
@@ -38,7 +38,7 @@ export const ApplicationViews = () => {
             </Route>
 
             <Route exact path="/designRequests/:requestId(\d+)">
-                <Request />
+                <RequestList />
             </Route>
 
             <Route exact path="/portfolio">

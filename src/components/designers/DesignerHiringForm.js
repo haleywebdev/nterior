@@ -6,7 +6,7 @@ import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min"
 export const DesignerHiringForm = () => {
     const history = useHistory()
     const [designer, updateDesigner] = useState({
-        userId: 0,
+        userId: 2,
         experience: "",
         availability: false,
         fullTime: false,
