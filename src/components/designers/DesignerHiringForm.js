@@ -75,19 +75,6 @@ export const DesignerHiringForm = () => {
                             </div>
                         </fieldset>
                         
-                        {/* <fieldset>
-                            <div className="form-group">
-                                <label htmlFor="manager">Are You Applying for A Manager Position?</label>
-                                <input
-                                    onChange={(evt) => {
-                                        const copy = { ...designer }
-                                        copy.manager = evt.target.checked
-                                        updateDesigner(copy)
-                                    }}
-                                    type="checkbox" />
-                            </div>
-                        </fieldset> */}
-                        
                         <fieldset>
                             <div className="form-group">
                                 <label htmlFor="name">Preferred Pay Rate: </label>
