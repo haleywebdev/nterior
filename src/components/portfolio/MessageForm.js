@@ -3,11 +3,12 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 export const MessageForm = () => {
     const [message, updateMessage] = useState({
+        userId: "",
         designerId: "",
         messageText: "",
         read: false
     })
-    const [users, defineUsers] = useState([])
+    const [designer, getDesigner] = useState([])
     const history = useHistory()
 
     const submitMessage = (evt) => {
@@ -35,13 +36,13 @@ export const MessageForm = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/users`)
+            fetch("http://localhost:8088/designers?_expand=user")
                 .then(res => res.json())
-                .then((data) => {
-                    defineUsers(data)
-                })
-        },
-        []
+                .then((des) => {
+                    getDesigner(des)
+                }
+                )
+        }, []
     )
 
     return (
@@ -61,10 +62,15 @@ export const MessageForm = () => {
                         }
                         >
                             <option value="0">Choose A Recipient...</option>
-                            {users.map(u => (
-                                <option key={u.id} value={u.id}>
-                                    {u.name}
-                                </option>))}
+                            {
+                                designer.map(
+                                    (d) => {
+                                        if (d.user.designer === true) {
+                                            return <option key={d.id} value={d.id}>
+                                                {d.user.name}
+                                            </option>
+                                        }
+                                    })}
                         </select>
                     </div>
                 </fieldset>

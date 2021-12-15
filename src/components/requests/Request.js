@@ -9,7 +9,7 @@ export const Request = () => {
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
     const { requestId } = useParams()
     const history = useHistory()
-        
+
     useEffect(
         () => {
             return fetch(`http://localhost:8088/designRequests/${requestId}?_expand=user&_expand=designer&_expand=style`)
@@ -97,6 +97,18 @@ export const Request = () => {
         }, []
     )
 
+    const completedButton = () => {
+    if (request.completed === false) {
+        return <div className="request__completed">
+        <button
+            id="comp"
+            value={request.completed}
+            onClick={Req}>Mark As Complete</button>
+    </div>
+    } else {
+        return ""
+    }}
+
     return (
         <>
             <h2>Request Details</h2>
@@ -104,15 +116,15 @@ export const Request = () => {
             <section className="">
                 <div className="request__user">Submitted by: {request.user?.name}</div>
                 <div className="request_designer">
-                {
-                designer.map(
-                    (d) => {
-                        if (users.id === d.userId && d.user.designer === true) {
-                            return <div key={`d--${d.id}`}>Designed by: {d.user.name}
-                            </div>
-                        }
-                    })}
-                    </div>
+                    {
+                        designer.map(
+                            (d) => {
+                                if (users.id === d.userId && d.user.designer === true) {
+                                    return <div key={`d--${d.id}`}>Designed by: {d.user.name}
+                                    </div>
+                                }
+                            })}
+                </div>
                 <div className="request__style">Style: {request.style?.style}</div>
                 <div className="request__room">Room: {request.room}</div>
                 <div className="request__windows">Windows: {request.windows}</div>
@@ -122,21 +134,14 @@ export const Request = () => {
                 {
                     users?.designer ?
 
-                        <div className="request__completed">
-                            <button
-                                id="comp"
-                                value={request.completed}
-                                onClick={Req}>Mark As Complete</button></div>
+                completedButton()
 
-                        :
+                :
 
-                        <><button onClick={() => { deleteRequest(request.id) }}>Cancel Request</button></>
+                <><button onClick={() => { deleteRequest(request.id) }}>Cancel Request</button></>
 
                 }
             </section>
-
-
-
 
         </>
     )

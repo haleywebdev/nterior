@@ -133,7 +133,7 @@ export const Portfolio = () => {
                             {messages.map(
                                 (messageObj) => {
                                     if (designer) {
-                                        if (designer.userId === messageObj.designerId && messageObj.read === false) {
+                                        if (designer.id === messageObj.userId && messageObj.read === false) {
                                             return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
                                                 <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
                                         }
