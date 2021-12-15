@@ -7,7 +7,9 @@ export const RequestForm = () => {
     const [designers, getDesigners] = useState([])
     const [styles, getStyles] = useState([])
 
-    // the initial state request is set to an object containing the necessary properties of a request object, whose values are pre-provided
+    // the initial state is set to an object containing the necessary properties of a request object, whose values are given
+    // these values will be updated transiently as the user interacts with the application, then submitted to the api permanently at onClick
+
     const [request, updateRequest] = useState({
         designerId: 1,
         styleId: 2,
@@ -35,6 +37,7 @@ export const RequestForm = () => {
     }, [])
 
     //submitRequest function performs the POST operation
+    // each key in the new request will copy the user's choice and replace the initial state set above
 
     const submitRequest = (evt) => {
         evt.preventDefault()
@@ -95,8 +98,8 @@ export const RequestForm = () => {
     )
 
     // the form captures the correct property values with an onChange
-    // with the onChange event, we first make a copy of the data 
-    // then, the value of that property is converted and copied in the request object 
+    // with the onChange event, we first make a copy of the initial state object 
+    // the value of that property is updated, converted and copied in the request object 
 
     // the submitRequest function is invoked in the onClick of the button, 
     // as soon as the button is clicked, transient state is now permanent 

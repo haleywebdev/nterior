@@ -16,6 +16,9 @@ export const Message = () => {
             )
     }
 
+
+    //re-renders the page after a message has been deleted
+
     useEffect(
         () => {
             fetchMessages()
@@ -41,15 +44,27 @@ export const Message = () => {
             })
     }
 
+    // renders the page based on which user is logged in
+
     useEffect(() => {
         getCurrentUser()
     }, [])
 
     return (
         <>
+
+            {/* the button on click will send the uder to the form to create a message */}
+
             <div>
                 <button onClick={() => history.push("/messages/create")}>Send A New Message</button>
             </div>
+
+            {/* iterating through messages array, whose value is an array of message objects given by the getMessages function. 
+            if the id of the logged in user is striclty equal to the userId on the message object, 
+            and if the message object 'read' property is false, 
+            return the message object to the dom.
+
+            the delete button will render the delete message function on click */}
 
             {messages.map(
                 (messageObj) => {

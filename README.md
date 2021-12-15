@@ -22,7 +22,7 @@ The firm wants their customers to be able to create an account on their website,
 7. Logout 
 
 ### Additional Features
-1. tbd
+[]
 
 # Getting Started with Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
