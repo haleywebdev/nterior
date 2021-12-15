@@ -37,7 +37,7 @@ export const Register = (props) => {
                                 if (user.designer === true) {
                                     history.push("/hiring")
                                 } else {
-                                    history.push("/")
+                                    history.push("/homepage")
                                 }
                             }
                         })

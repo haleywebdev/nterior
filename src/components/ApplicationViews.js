@@ -11,7 +11,6 @@ import { Portfolio } from "./portfolio/Portfolio"
 import { MessageForm } from "./portfolio/MessageForm"
 import { Register } from "./auth/Register"
 import { RequestList } from "./requests/RequestList"
-import { Request } from "./requests/Request"
 
 export const ApplicationViews = () => {
     return (

@@ -21,7 +21,7 @@ export const RequestList = () => {
                 })
 
         },
-        [requestId]
+        [requestId] // this dependency array will update every time a change is made in the requests
     )
 
     // the Req function will edit the completed property to true using a PUT method when the complete request button is clicked
@@ -121,16 +121,6 @@ export const RequestList = () => {
 
             <section className="">
                 <div className="request__user">Submitted by: {request.user?.name}</div>
-                <div className="request_designer">
-                    {
-                        designer.map(
-                            (d) => {
-                                if (user.id === d.userId && d.user.designer === true) {
-                                    return <div key={`d--${d.id}`}>Designed by: {d.user.name}
-                                    </div>
-                                }
-                            })}
-                </div>
                 <div className="request__style">Style: {request.style?.style}</div>
                 <div className="request__room">Room: {request.room}</div>
                 <div className="request__windows">Windows: {request.windows}</div>
