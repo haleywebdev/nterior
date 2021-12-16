@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom/cjs/react-router-dom.min"
 
-// this component renders what the user will see when they click on the hiring link in the footer
+// this component renders what a user without user authorization will see when they click on the hiring link in the footer
 
 export const Hire = () => {
 

@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from "react"
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
+// this component renders the form to hire a designer
+
 export const DesignerHiringForm = () => {
-    const history = useHistory()
+    const history = useHistory() // history is a hook that gives access to history the user can navigate to. alternative to Link.
     const [designer, updateDesigner] = useState({
         userId: 2,
         experience: "",
@@ -12,7 +14,7 @@ export const DesignerHiringForm = () => {
         fullTime: false,
         rate: "",
         manager: false
-    })
+    }) //useState returns the initial state variables and then a function to update it 
 
     const [users, setUsers] = useState()
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
@@ -25,7 +27,7 @@ export const DesignerHiringForm = () => {
 
     useEffect(() => {
         getCurrentUser()
-    }, [])
+    }, []) // this userEffect will only run on the first render 
 
     const submitForm = (evt) => {
         evt.preventDefault()
@@ -35,7 +37,7 @@ export const DesignerHiringForm = () => {
             availability: designer.availability,
             fullTime: designer.fullTime,
             rate: designer.rate
-        }
+        } // this form tracks transient state as the user is interacting with the application
 
         const fetchOption = {
             method: "POST",
@@ -43,13 +45,13 @@ export const DesignerHiringForm = () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(newForm)
-        }
+        } // this fetchOption is the POST method/HTTP request to send the data the user chose to state permanently 
 
         return fetch("http://localhost:8088/designers", fetchOption)
             .then(() => {
                 history.push("/homepage")
             })
-    }
+    } // this fetch call updates the list of designers after state has changed and navigates the user to the homepage 
 
     return (
         <> <h2>Join Our Firm!</h2>
@@ -63,6 +65,7 @@ export const DesignerHiringForm = () => {
                                 <label htmlFor="specialty">Experience:</label>
                                 <input
                                     onChange={(evt) => {
+                                        // since state cannot be directly modified, we make a copy of it
                                         const copy = { ...designer }
                                         copy.experience = evt.target.value
                                         updateDesigner(copy)
@@ -114,7 +117,7 @@ export const DesignerHiringForm = () => {
                             </div>
                         </fieldset><button className="btn btn-primary" onClick={submitForm}>
                             Submit Your Application
-                        </button>
+                        </button> {/* once the user clicks on the button to submit, the state will be permanently stored */}
 
                     </>
                     :

@@ -19,7 +19,7 @@ export const NavBar = (props) => {
         getCurrentUser()
     }, [])
 
-    // using conditional JSX, the navbar renders different based on the user role 
+    // using conditional JSX, the navbar renders differently based on the user role 
     // When a user clicks on a link in the navbar, the matching component is rendered
 
     return (

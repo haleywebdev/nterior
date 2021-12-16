@@ -15,6 +15,12 @@ import { RequestList } from "./requests/RequestList"
 export const ApplicationViews = () => {
     return (
         <>
+
+        {/* Applications views determines which view of the application will be rendered
+        The routes which are installed here from react-router-dom are like event listeners,
+        listening for when the URL has changed and routing the user to the matching component
+        which is imported as a child element on each route. */}
+
             <Route exact path="/homepage">
                 <Homepage />
             </Route>

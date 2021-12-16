@@ -1,8 +1,11 @@
 
 import React, { useEffect, useState } from "react"
 
+// this component renders the list of designers on the homepage 
+
 export const DesignerList = () => {
-    const [designer, getDesigner] = useState([])
+    const [designer, getDesigner] = useState([]) // useState returns an initial state variable (designer) and a function that 
+    // runs it or updates it 
 
 
     useEffect(
@@ -14,7 +17,8 @@ export const DesignerList = () => {
                 }
                 )
         }, []
-    )
+    ) // this use effect is fetching an augmented API url, then converts the string to javascript, then stores it in the 
+    // state function we use to run it 
 
     return (
         <>

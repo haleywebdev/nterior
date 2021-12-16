@@ -24,7 +24,7 @@ export const RequestForm = () => {
 
     const [users, setUsers] = useState()
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
-    // this is used to get the current user id stored in local, so that the views of different components can be adjusted based on the user's role
+    // this is used to get the current user id stored in local, so that app views can be based on user-role
 
     const getCurrentUser = () => {
         return fetch(`http://localhost:8088/users?id=${currentUser}`)

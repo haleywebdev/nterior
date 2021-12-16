@@ -2,6 +2,8 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "./Footer.css"
 
+// this component renders the footer
+
 export const Footer = (props) => {
     
     return (
