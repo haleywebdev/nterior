@@ -50,7 +50,7 @@ export const PendingRequest = () => {
                     <div>{designRequests.map(
                         (designRequestObj) => {
                             if (designer) {
-                                if (designer.id === designRequestObj.designerId && designRequestObj.completed === false) {
+                                if (designer?.id === designRequestObj.designerId && designRequestObj.completed === false) {
                                     return <ul key={`request--${designRequestObj.id}`}><Link to={`/designRequests/${designRequestObj.id}`}>{designRequestObj.description}</Link></ul>
                                 }
                             }

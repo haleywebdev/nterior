@@ -3,7 +3,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Space+Mono&display=swap');
 /*Typography
 --------------------------------------------------------------*/
-body,
+body {
+  margin-bottom: 61px;
+  color: #404040;
+  font-family: "Monsterrat", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 button,
 input,
 select,

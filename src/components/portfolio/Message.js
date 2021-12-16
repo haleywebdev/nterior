@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 export const Message = () => {
     const [messages, getMessages] = useState([])
     const [user, setUser] = useState()
+    const [designer, setDesigner] = useState()
     const currentUser = parseInt(localStorage.getItem("nterior_user"))
     const history = useHistory()
 
@@ -41,14 +42,18 @@ export const Message = () => {
             .then(res => res.json())
             .then(response => {
                 setUser(response[0])
+                fetch(`http://localhost:8088/designers?userId=${currentUser}`)
+                    .then(res => res.json())
+                    .then(res => {
+                        setDesigner(res[0])
+                    })
             })
     }
-
-    // renders the page based on which user is logged in
 
     useEffect(() => {
         getCurrentUser()
     }, [])
+
 
     return (
         <>
@@ -66,16 +71,60 @@ export const Message = () => {
 
             the delete button will render the delete message function on click */}
 
-            {messages.map(
-                (messageObj) => {
-                    if (user?.id === messageObj.userId && messageObj.read === false) {
-                        return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
-                            <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
-                    }
+            {
+                user?.designer ?
 
-                }
+                    <div><h4>Messages Sent</h4>
+                        {messages.map(
+                            (messageObj) => {
+                                if (user.id === messageObj.userId && messageObj.read === false) {
+                                    return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
+                                        <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
+                                }
 
-            )}
+                            }
+
+                        )}
+
+                        <h4>Messages Received</h4>
+                        {messages.map(
+                            (messageObj) => {
+                                if (user.id === messageObj.designerId && messageObj.read === false) {
+                                    return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user?.name}
+                                        <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
+
+                                }
+                            }
+                        )}
+
+                    </div>
+
+                    :
+
+                    <div><h4>Messages Sent</h4>{messages.map(
+                        (messageObj) => {
+                            if (user?.id === messageObj.userId && messageObj.read === false) {
+                                return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user.name}
+                                    <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
+                            }
+
+                        }
+
+                    )}
+
+                        <h4>Messages Received</h4>
+                        {messages.map(
+                            (messageObj) => {
+                                if (user?.id === messageObj.designerId && messageObj.read === false) {
+                                    return <ul key={`message--${messageObj.id}`}>{messageObj.messageText} From: {messageObj.user?.name}
+                                        <button onClick={() => { deleteMessage(messageObj.id) }}>Delete</button></ul>
+
+                                }
+                            }
+                        )}
+
+                    </div>
+            }
 
         </>
     )

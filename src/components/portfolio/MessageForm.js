@@ -11,12 +11,13 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min"
 
 export const MessageForm = () => {
     const [message, updateMessage] = useState({
-        userId: "",
-        designerId: "",
+        userId: 1,
+        designerId: 2,
         messageText: "",
         read: false
     })
     const [designer, getDesigner] = useState([])
+    const [user, getUser] = useState([])
     const history = useHistory()
 
     const submitMessage = (evt) => {
@@ -53,6 +54,17 @@ export const MessageForm = () => {
         }, []
     )
 
+    useEffect(
+        () => {
+            fetch("http://localhost:8088/users")
+                .then(res => res.json())
+                .then((des) => {
+                    getUser(des)
+                }
+                )
+        }, []
+    )  
+
     return (
         <>
             <form className="hireForm">
@@ -60,7 +72,6 @@ export const MessageForm = () => {
 
                 <fieldset>
                     <div className="form-group">
-                        <label htmlFor="location">Choose A Recipient</label>
                         <select onChange={
                             (evt) => {
                                 const copy = { ...message }
@@ -71,13 +82,13 @@ export const MessageForm = () => {
                         >
                             <option value="0">Choose A Recipient...</option>
                             {
-                                designer.map(
-                                    (d) => {
-                                        if (d.user.designer === true) {
-                                            return <option key={d.id} value={d.id}>
-                                                {d.user.name}
+                                user.map(
+                                    (u) => {
+                                    
+                                            return <option key={u.id} value={u.id}>
+                                                {u.name}
                                             </option>
-                                        }
+                                        
                                     })}
                         </select>
                     </div>
