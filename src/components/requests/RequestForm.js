@@ -9,6 +9,9 @@ export const RequestForm = () => {
 
     // the initial state is set to an object containing the necessary properties of a request object, whose values are given
     // these values will be updated transiently as the user interacts with the application, then submitted to the api permanently at onClick
+console.log("Request Form Rendered")
+
+// the state is re-rendered every time a change is made by the user in the form
 
     const [request, updateRequest] = useState({
         designerId: 1,

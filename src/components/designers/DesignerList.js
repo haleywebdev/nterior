@@ -4,16 +4,15 @@ import React, { useEffect, useState } from "react"
 // this component renders the list of designers on the homepage 
 
 export const DesignerList = () => {
-    const [designer, getDesigner] = useState([]) // useState returns an initial state variable (designer) and a function that 
+    const [designers, setDesigners] = useState([]) // useState returns an initial state variable (designer) and a function that 
     // runs it or updates it 
-
 
     useEffect(
         () => {
             fetch("http://localhost:8088/designers?_expand=user")
                 .then(res => res.json())
                 .then((des) => {
-                    getDesigner(des)
+                    setDesigners(des)
                 }
                 )
         }, []
@@ -23,14 +22,14 @@ export const DesignerList = () => {
     return (
         <>
             {
-                designer.map(
+                designers.map(
                     (d) => {
-                        if (d.user.designer === true) {
-                            return <div key={`d--${d.id}`}><b>{d.user.name}</b>
-                                <div>Experience: {d.experience}</div>
-                                <div>Availability: {d.availability.toString()}</div>
-                            </div>
-                        }
+
+                        return <div key={`d--${d.id}`}><b>{d.user.name}</b>
+                            <div>Experience: {d.experience}</div>
+                            <div>Availability: {d.availability.toString()}</div>
+                        </div>
+
                     })}
         </>
     )
